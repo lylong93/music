@@ -1,6 +1,6 @@
 <template>
   <div class="block">
-    <!-- <span class="demonstration">默认 Hover 指示器触发</span> -->
+    <span class="demonstration">{{test}}</span>
     <el-carousel height="350px">
       <el-carousel-item v-for="item in msg" :key="item">
         <h3>{{ item }}</h3>
@@ -10,11 +10,19 @@
 </template>
 
 <script>
+import go from '.././common/go';
+import te from './test';
+
+console.log(te.store.state.count);
+// Vuex();
+// console.log(Vuex);
 export default {
   // name: 'hello',
   data() {
     return {
-      msg: 6,
+      msg: 7,
+      test: go.kk,
+      // gg: te,
     };
   },
 };
