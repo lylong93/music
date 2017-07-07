@@ -1,6 +1,6 @@
 <template>
   <div class="block">
-    <span class="demonstration">{{test}}</span>
+    <span class="demonstration">{{count}}</span>
     <el-carousel height="350px">
       <el-carousel-item v-for="item in msg" :key="item">
         <h3>{{ item }}</h3>
@@ -10,20 +10,30 @@
 </template>
 
 <script>
-import go from '.././common/go';
-import te from './test';
+import go from '../api';
+// import te from './test';
 
-console.log(te.store.state.count);
-// Vuex();
-// console.log(Vuex);
+go.test();
+
 export default {
   // name: 'hello',
   data() {
     return {
       msg: 7,
-      test: go.kk,
-      // gg: te,
+      test: 5,
+      gg: go,
     };
+  },
+  computed: {
+    count() {
+      // console.log(this.$store);
+      // console.log(this.$store.state.count);
+      return this.$store.state.count;
+    },
+    kkkkk() {
+      // console.log(go.test);
+      return go.test();
+    },
   },
 };
 </script>

@@ -6,15 +6,18 @@ import ElementUI from 'element-ui';
 import 'element-ui/lib/theme-default/index.css';
 import App from './App';
 import router from './router';
+import store from './store';
 
 Vue.config.productionTip = false;
 
 /* eslint-disable no-new */
 Vue.use(ElementUI);
 Vue.use(Vuex);
+// console.log(store.state.count);
 
 new Vue({
   el: '#app',
+  store,
   router,
   template: '<App/>',
   components: { App },

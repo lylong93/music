@@ -3,6 +3,7 @@ import Router from 'vue-router';
 import Hello from '@/components/Hello';
 import carousel from '@/components/carousel';
 
+
 Vue.use(Router);
 
 export default new Router({
