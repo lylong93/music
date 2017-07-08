@@ -2,7 +2,7 @@
   <div class="block">
     <span class="demonstration">{{count}}</span>
     <el-carousel height="350px">
-      <el-carousel-item v-for="item in msg" :key="item">
+      <el-carousel-item v-for="item in {count}" :key="item">
         <h3>{{ item }}</h3>
       </el-carousel-item>
     </el-carousel>
@@ -10,10 +10,10 @@
 </template>
 
 <script>
-import go from '../api';
+// import go from '../api';
 // import te from './test';
 
-go.test();
+// go.test();
 
 export default {
   // name: 'hello',
@@ -21,7 +21,7 @@ export default {
     return {
       msg: 7,
       test: 5,
-      gg: go,
+      // gg: go,
     };
   },
   computed: {
@@ -32,7 +32,7 @@ export default {
     },
     kkkkk() {
       // console.log(go.test);
-      return go.test();
+      // return go.test();
     },
   },
 };
