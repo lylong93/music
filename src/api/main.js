@@ -1,24 +1,19 @@
 import axios from 'axios';
 
 
-// function _get(url) {
-//   axios.get(url)
-//     .then((res) => {
-//         console.log(res.data);
-//         return res.data;
-//       })
-//       .catch((err) => {
-//         console.log(err);
-//       });
-// }
+// const a = function get(url) {
+//   return axios.get(url);
+// };
+
+const url = '/api/top/playlist?limit=10&order=new';
+
 export default {
   getBanner() {
-    axios.get('/api/banner')
-      .then((res) => {
-        console.log(res.data);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    return axios.get(url);
+  },
+  test() {
+    return axios.get(url).then((res) => {
+      console.log(res.data);
+    });
   },
 };
