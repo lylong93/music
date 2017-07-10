@@ -1,8 +1,7 @@
 <template>
   <div class="block">
-    <span class="demonstration">{{count}}</span>
     <el-carousel height="350px">
-      <el-carousel-item v-for="item in {arr}" :key="item">
+      <el-carousel-item v-for="item in arr " :key="item">
         <img :src="item">
       </el-carousel-item>
     </el-carousel>
@@ -11,6 +10,7 @@
 
 <script>
 const arr = [
+  'http://p3.music.126.net/s25q2x5QyqsAzilCurD-2w==/7973658325212564.jpg',
   'http://p3.music.126.net/s25q2x5QyqsAzilCurD-2w==/7973658325212564.jpg',
   'http://p3.music.126.net/s25q2x5QyqsAzilCurD-2w==/7973658325212564.jpg',
 ];
@@ -38,7 +38,7 @@ export default {
   },
   created() {
     this.$store.commit('getB');
-    console.log(this.$store.state.count);
+    // console.log(this.$store.state.count);
   },
 };
 </script>

@@ -1,19 +1,13 @@
 import axios from 'axios';
-
-
-// const a = function get(url) {
-//   return axios.get(url);
-// };
-
-const url = '/api/top/playlist?limit=10&order=new';
+import url from './urlconfig';
 
 export default {
   getBanner() {
-    return axios.get(url);
+    return axios.get(url.bannerURl);
   },
   test() {
-    return axios.get(url).then((res) => {
-      console.log(res.data);
+    return axios.get(url.bannerURl).then((res) => {
+      console.log(res);
     });
   },
 };
