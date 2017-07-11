@@ -1,8 +1,8 @@
 <template>
   <div class="block">
-    <el-carousel height="350px">
+    <el-carousel width="100px" height="250px">
       <el-carousel-item v-for="item in arr " :key="item">
-        <img :src="item">
+        <img :src="item" height="100%">
       </el-carousel-item>
     </el-carousel>
   </div> 
@@ -11,8 +11,8 @@
 <script>
 const arr = [
   'http://p3.music.126.net/s25q2x5QyqsAzilCurD-2w==/7973658325212564.jpg',
-  'http://p3.music.126.net/s25q2x5QyqsAzilCurD-2w==/7973658325212564.jpg',
-  'http://p3.music.126.net/s25q2x5QyqsAzilCurD-2w==/7973658325212564.jpg',
+  'http://p4.music.126.net/V9-MXz6b2MNhEKjutoDWIg==/7937374441542745.jpg',
+  'http://p3.music.126.net/e0gGadEhjur2UuUpDF9hPg==/7788940372125389.jpg',
 ];
 
 export default {
@@ -44,6 +44,9 @@ export default {
 </script>
 
 <style>
+  .block{
+    width: 100px;
+  }
   .el-carousel__item h3 {
     color: #475669;
     font-size: 14px;

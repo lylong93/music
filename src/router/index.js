@@ -12,6 +12,16 @@ export default new Router({
       path: '/',
       name: 'Hello',
       component: Hello,
+      children: [
+        {
+          path: 'one',
+          component: carousel,
+        },
+        {
+          path: 'tow',
+          component: Hello,
+        },
+      ],
     },
     {
       path: '/carousel',
