@@ -1,24 +1,20 @@
 <template>
   <div class="hello">
-    <div class="head-wrapper">
+    <!-- <div class="head-wrapper">
     </div>
     <div class="body-wrapper">  
-      <v-side class="side"></v-side>
-      <router-view></router-view>
- <!--      <div class="body-main">  
-        <v-carousel class='carousel'></v-carousel>
-      </div> -->
-    </div>
-    <h1>{{ msg }}</h1>
-    <el-button>默认按钮</el-button>
-    <el-button type="primary">主要按钮</el-button>
-    <el-button type="text">文字按钮</el-button>
+      <v-side class="body-side"></v-side>
+      <router-view class="body-main"></router-view>
+    </div> -->
+    <!-- <v-play class='play'></v-play>   -->
   </div>
 </template>
 
 <script>
 import carousel from './carousel';
 import side from './side';
+import one from './one';
+import play from './play';
 
 export default {
   name: 'hello',
@@ -30,36 +26,62 @@ export default {
   components: {
     'v-carousel': carousel,
     'v-side': side,
+    'v-one': one,
+    'v-play': play,
   },
 };
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="scss">
-.hello {
-  .head-wrapper {
-    height: 70px;
-    background: rgb(198,47,47);
-  }
-  .body-wrapper {
-    display: flex;
-    .side {
-       flex:0 1 300px;
-       width: 300px;
-    }
-    .body-main { 
-      display: flex;
-      width: 1000px;
-      flex:0 1 1000px;
-      padding: 0 50px;
-      .carousel {
-        flex: 0 1 1000px;
-        // width: 1000px;
-      }
-    }
-    }
-}
-// h1, h2 {
+   .hello{
+    width: 100%;
+   }
+// .hello {
+//    position: relative;
+//    // height: 500px;
+//   .head-wrapper {
+//     position: fixed;
+//     top: 0;
+//     left: 0;
+//     height: 136px;
+//     width:100%;
+//     background: rgb(198,47,47);
+//   }
+//   .body-wrapper {
+//     display: flex;
+//     .body-side {
+//       position :fixed;
+//       top:70px;
+//       left:0;
+//       flex:0 1 300px;
+//       width: 300px;
+//     }
+//     .body-main { 
+//       // position: absolute;
+//       // top:30px;
+//       // left: 300px;
+//       // display: flex;
+//       // border: 1px solid black;
+//       // width: 1000px;
+//       // height: 900px;
+//       // flex:0 1 1000px;
+//       // padding: 10px 50px;
+//       // margin: 30px;
+//       .carousel {
+//         flex: 0 1 1000px;
+//         // width: 1000px;
+//       }
+//     }
+//   }
+//   .play {
+//     width: 700px;
+//     position: fixed;
+//     bottom: 0;
+//     left: 0
+//   }
+// }
+// // h1, h2 {
 //   font-weight: normal;
 // }
 
