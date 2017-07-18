@@ -36,6 +36,9 @@ module.exports = {
     'no-console': [0],
     'func-names': [0],
     'arrow-body-style': [0],
+    'no-unused-expressions' :[0],
+    'no-else-return': [0],
+    'prefer-template': [0],
     // allow debugger during development
     'no-debugger': process.env.NODE_ENV === 'production' ? 2 : 0
   }
