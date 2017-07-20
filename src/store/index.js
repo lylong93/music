@@ -6,7 +6,8 @@ vue.use(Vuex);
 
 const state = {
   count: 6,
-  banner: [],
+  banners: [],
+  recomList: [],
 };
 export default new Vuex.Store({
   state,

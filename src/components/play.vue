@@ -11,9 +11,9 @@
         <i ref="i" class="progress-scroll">k</i>
       </span>
       <span class="progress-timeEnd">{{duration}}</span>
-      <span class="progress-timeEnd">{{duration}}</span>
+      <span class="progress-voice" @click="voice()">voice</span>
     </div>
-    <audio ref = 'hidPlay' @timeupdate='con' :src=misurl controls="controls"></audio>
+    <audio class="audio" ref = 'hidPlay' @timeupdate='con' :src=misurl controls="controls"></audio>
   </div>
 </template>
 <script>
@@ -60,6 +60,9 @@ export default {
       this.doo = this.doo + c;
       this.$refs.i.style.width = (c * this.currentTime) + 'px';
       console.log(this.doo);
+    },
+    voice() {
+      console.log(this.$refs.hidPlay.volume);
     },
   },
   computed: {
@@ -137,6 +140,7 @@ export default {
           left: 0;
           height: 6px;
           width: 10px;
+          border-radius: 10px;
           background: red;
         }
       }
@@ -147,20 +151,18 @@ export default {
         width: 50px;
         height: 20px;
       }
-      // .bar-scroll{
-      //   display:inline-block;
-      //   width: 109px;
-      //   height: 10px;
-      //   background: red;
-      // }
+      .progress-voice {
+        width: 30px;
+        height: 30px;
+        margin: 30px;
+        background: black;
+      }
+      @media screen and (max-width: 480px) {
+        display: none;
+      }
     }
-    // .play-contral {
-    //   background: red;
-    //   flex:1 1 150px;
-    // }
-    // .progress-wrapper {
-    //   background: black;
-    //   flex:2 1 200px;
-    // }
-  }
+    .audio {
+      display: none;
+    }
+  } 
 </style>

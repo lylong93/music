@@ -1,5 +1,11 @@
-import main from './main';
+import axios from 'axios';
+import url from './urlconfig';
 
 export default {
-  main,
+  getBanner() {
+    return axios.get(url.bannerURl);
+  },
+  getrecomList() {
+    return axios.get(url.recomList);
+  },
 };

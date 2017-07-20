@@ -1,15 +1,16 @@
 <template>
   <div id="app">
     <div class="head"></div>
-    <div class="side">
-      <router-link to="one" >one</router-link>
-      <router-link to="tow" >tow</router-link>
-    </div>
-    <div class='body' ref = 'scorll'>
-      <router-view ></router-view>
+    <div class="body-wrapper">
+      <div class="side">
+        <router-link to="one" >one</router-link>
+        <router-link to="tow" >tow</router-link>
+      </div>
+      <div class='body' ref = 'scorll'>
+        <router-view class='test'></router-view>
+      </div>
     </div>
     <v-play></v-play>
-    <!-- <div class="foot"></div> -->
   </div>
 </template>
 
@@ -19,12 +20,6 @@ import play from './components/play';
 
 export default {
   name: 'app',
-  // created() {
-  //   this.$nextTick(() => {
-  //     this.initScroll();
-  //     // this.con();
-  //   });
-  // },
   mounted() {
     this.$nextTick(() => {
       this.initScroll();
@@ -55,8 +50,7 @@ export default {
 </script>
 
 <style lang='scss'>
-@import './common/sass/index.scss';
-
+// @import './common/sass/index.scss';
 
 // #app {
 //   /*font-family: 'Avenir', Helvetica, Arial, sans-serif;
@@ -72,36 +66,45 @@ export default {
 //   height: 500px;
 //   width: 100px;
 // }
+body{
+  // overflow: hidden;
+  // overflow-x:hidden;
+  // overflow-y:hidden;
+}
 #app {
   overflow: hidden;
   text-align: center;
   .head{
-    // position:fixed;
     width:100%;
     height: 70px;
     background: red;
-    // overflow: hidden;
   }
-  .side{
-    width: 100px;
-    border: 1px solid red;
-    // background: blue;
-  }
-  .body {
-    overflow: hidden;
+  .body-wrapper {
+    display: flex;
+    width: 100%;
     position:absolute;
-    top: 70px;
-    bottom: 10px;
-    left: 100px;
-    // border: 1px solid black;
-    background: rgba(0,0,0,.5);
-  }
-  .foot{
-    position:fixed;
-    bottom: 0;
-    width:100%;
-    height: 70px;
-    background: yellow;
+    top:70px;
+    bottom:70px;
+    overflow: hidden;
+    .side{
+      // height: 500px;
+      flex: 1 1 350px;
+      border: 1px solid red;
+    }
+    .body {
+      display: flex;
+      flex: 6 1 auto;
+      justify-conten:center;
+      height: 500px;
+      background: rgb(255,255,135);
+      .test{
+        flex: 0 1 1000px;
+        margin: 0 auto;
+        height: 1000px;
+        overflow: hidden;
+        background: rgb(255,255,255);
+      }
+    }
   }
 }
 </style>

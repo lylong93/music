@@ -1,7 +1,7 @@
 <template>
   <div class="block">
-    <el-carousel width="100px" height="250px">
-      <el-carousel-item v-for="item in arr " :key="item">
+    <el-carousel  class='arousel' >
+      <el-carousel-item class="el"  v-for="item in arr " :key="item">
         <img :src="item" height="100%">
       </el-carousel-item>
     </el-carousel>
@@ -16,7 +16,6 @@ const arr = [
 ];
 
 export default {
-  // name: 'hello',
   data() {
     return {
       msg: 7,
@@ -26,7 +25,7 @@ export default {
   },
   computed: {
     count() {
-      console.log(this.$store.state.count);
+      // console.log(this.$store.state.count);
       return this.$store.state.count;
     },
     cou() {
@@ -43,9 +42,22 @@ export default {
 };
 </script>
 
-<style>
+<style lang='scss'>
   .block{
-    width: 100px;
+    width: 1000px;
+    .el-carousel__container{
+        height: 200px;
+      }
+    @media screen and (max-width: 480px) {
+      width: 300px;
+      height: 100px;
+      .el-carousel__container{
+        height: 100px;
+      }
+      .el {
+        height: 100px; 
+      }
+    }
   }
   .el-carousel__item h3 {
     color: #475669;
