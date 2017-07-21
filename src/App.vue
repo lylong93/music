@@ -29,7 +29,7 @@ export default {
   methods: {
     initScroll() {
       this.meunScroll = new BSscroll(this.$refs.scorll, {
-        click: true,
+        // click: true,
       });
     },
     con() {
@@ -37,7 +37,7 @@ export default {
         this.initScroll();
       // this.con();
       });
-      console.log(this.$route);
+      // console.log(this.$route);
     },
   },
   components: {
@@ -88,19 +88,21 @@ body{
     overflow: hidden;
     .side{
       // height: 500px;
-      flex: 1 1 350px;
+      flex: 1 1 100px;
       border: 1px solid red;
     }
     .body {
       display: flex;
-      flex: 6 1 auto;
+      flex: 9 1 auto;
       justify-conten:center;
       height: 500px;
-      background: rgb(255,255,135);
+      background: rgb(255,255,255);
       .test{
         flex: 0 1 1000px;
-        margin: 0 auto;
+        width: 0px;
         height: 1000px;
+        border: 1px solid red;
+        margin: 10px auto;
         overflow: hidden;
         background: rgb(255,255,255);
       }

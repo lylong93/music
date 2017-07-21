@@ -4,6 +4,7 @@ import Hello from '@/components/Hello';
 // import carousel from '@/components/carousel';
 import one from '@/components/one';
 import tow from '@/components/tow';
+import applist from '@/components/applist';
 
 
 Vue.use(Router);
@@ -15,17 +16,6 @@ export default new Router({
       name: 'Hello',
       component: Hello,
       redirect: { name: 'one' },
-      // children: [
-      //   {
-      //     // name: 'one',
-      //     path: 'one',
-      //     component: one,
-      //   },
-      //   {
-      //     path: 'tow',
-      //     component: tow,
-      //   },
-      // ],
     },
     {
       path: '/one',
@@ -34,7 +24,13 @@ export default new Router({
     },
     {
       path: '/tow',
+      name: 'tow',
       component: tow,
+    },
+    {
+      path: '/applist',
+      name: 'applist',
+      component: applist,
     },
   ],
 });

@@ -13,58 +13,67 @@
         <span class="title">推荐歌单</span>
         <span class="more">更多</span>
       </div>
-      <div v-for="item in list" class='item'>{{item.name}}</div>
+      <div @click="detail($event)" v-for="item in list" class='item'>
+        <img :src="item.picUrl" height="100%">
+        <div class="name">{{item.name}}</div>
+        <span class="playCount">{{item.playCount}}</span>
+        <span class="copywriter">{{item.copywriter}}</span>
+      </div>
     </div>
   </div>
 </template>
 <script>
 import carousel from './carousel';
+import api from '../api';
+
+const a = api.forvue.getrecomList();
 
 export default {
   data() {
     return {
       msg: 'one',
-      list: this.$store.state.recomList,
+      list: [],
     };
-  },
-  computed: {
-    count() {
-      console.log(this.$store.state.recomList);
-      return this.list[0];
-    },
   },
   created() {
     this.init();
-    this.$nextTick(() => {
-      this.init();
-      // this.con();
-    });
-  },
-  watch: {
-    list: 'init',
   },
   methods: {
     init() {
-      this.$store.commit('getC');
-      // console.log(this.$store.state.banners);
-      // console.log('ok');
+      a.then((res) => {
+        const list = res.data.result.slice(0, 5);
+        this.list = list;
+        // console.log(list);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+    },
+    detail(event) {
+      /* eslint-disable , no-underscore-dangle, */
+      // if (!event._constructed) {
+      //   return;
+      // }
+      event.stopPropagation();
+      event.preventDefault();
+      console.log(event);
+      // const id = 123;
+      this.$router.push({ path: 'applist', query: { userId: 123 } });
     },
   },
   components: {
     'v-carousel': carousel,
   },
 };
-</script>
+</script> 
 <style lang="scss">
   .one{
-    // width: 1000px;
-    height: 900px;
     .tab{
       display: flex;
       justify-content: center;
       height: 30px;
       border-bottom: 1px solid black;
-      margin:10px 0;
+      margin-bottom: 10px;
       a{
         color:black;
         margin: 0 30px;
@@ -116,13 +125,44 @@ export default {
         }
       }
       .item{
+        position: relative;
         width: 150px;
         height: 150px;
         margin: 10px;
-        border: 1px solid red;
+        &:hover{
+          cursor: pointer;
+          .playCount{
+            display: none;
+          }
+          .copywriter{
+            display: block;
+          }
+        }
         @media screen and (max-width: 480px){
           width: 100px;
           height: 100px;
+        }
+        .name{
+          font-size: 10px;
+        }
+        .playCount{
+          position: absolute;
+          top:0;
+          right:0;
+          font-size: 12px;
+          color:rgb(255,255,255);
+        }
+        .copywriter{
+          display: none;
+          position: absolute;
+          top:0;
+          left:0;
+          width: 100%;
+          padding: 5px 0;
+          line-height: 12px;
+          font-size: 12px;
+          background: rgba(0,0,0,.3);
+          color:rgb(255,255,255);
         }
       }
     }
