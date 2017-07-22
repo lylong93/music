@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <div class="head"></div>
+    <div class="head" @click="g()"></div>
     <div class="body-wrapper">
       <div class="side">
         <router-link to="one" >one</router-link>
@@ -15,7 +15,7 @@
 </template>
 
 <script>
-import BSscroll from 'better-scroll';
+// import BSscroll from 'better-scroll';
 import play from './components/play';
 
 export default {
@@ -28,16 +28,18 @@ export default {
   },
   methods: {
     initScroll() {
-      this.meunScroll = new BSscroll(this.$refs.scorll, {
-        // click: true,
-      });
+      // this.meunScroll = new BSscroll(this.$refs.scorll, {
+      //   click: true,
+      // });
     },
     con() {
       this.$nextTick(() => {
         this.initScroll();
-      // this.con();
       });
-      // console.log(this.$route);
+    },
+    g() {
+      this.meunScroll.getCurrentPage();
+      console.log(this.meunScroll);
     },
   },
   components: {
@@ -66,13 +68,8 @@ export default {
 //   height: 500px;
 //   width: 100px;
 // }
-body{
-  // overflow: hidden;
-  // overflow-x:hidden;
-  // overflow-y:hidden;
-}
 #app {
-  overflow: hidden;
+  // overflow: hidden;
   text-align: center;
   .head{
     width:100%;
@@ -82,28 +79,23 @@ body{
   .body-wrapper {
     display: flex;
     width: 100%;
-    position:absolute;
-    top:70px;
-    bottom:70px;
-    overflow: hidden;
+    position:relative;
+    height: 500px;
     .side{
-      // height: 500px;
-      flex: 1 1 100px;
+      flex: 0 1 200px;
+      // width: 100px;
       border: 1px solid red;
     }
     .body {
       display: flex;
       flex: 9 1 auto;
+      overflow: auto;
       justify-conten:center;
-      height: 500px;
-      background: rgb(255,255,255);
+      background: rgb(255,255,123);
       .test{
         flex: 0 1 1000px;
-        width: 0px;
-        height: 1000px;
-        border: 1px solid red;
-        margin: 10px auto;
-        overflow: hidden;
+        min-height: 700px;
+        margin: 3px auto;
         background: rgb(255,255,255);
       }
     }

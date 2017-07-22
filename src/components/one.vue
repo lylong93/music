@@ -13,7 +13,7 @@
         <span class="title">推荐歌单</span>
         <span class="more">更多</span>
       </div>
-      <div @click="detail($event)" v-for="item in list" class='item'>
+      <div @click="detail($event)" v-for="item in list" class='item' :data-id="item.id">
         <img :src="item.picUrl" height="100%">
         <div class="name">{{item.name}}</div>
         <span class="playCount">{{item.playCount}}</span>
@@ -50,15 +50,8 @@ export default {
       });
     },
     detail(event) {
-      /* eslint-disable , no-underscore-dangle, */
-      // if (!event._constructed) {
-      //   return;
-      // }
-      event.stopPropagation();
-      event.preventDefault();
-      console.log(event);
-      // const id = 123;
-      this.$router.push({ path: 'applist', query: { userId: 123 } });
+      const id = event.currentTarget.dataset.id;
+      this.$router.push({ path: 'applist', query: { id } });
     },
   },
   components: {
@@ -68,6 +61,7 @@ export default {
 </script> 
 <style lang="scss">
   .one{
+    min-height:700px;
     .tab{
       display: flex;
       justify-content: center;
