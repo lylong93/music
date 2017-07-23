@@ -5,69 +5,59 @@
       <div class="side">
         <router-link to="one" >one</router-link>
         <router-link to="tow" >tow</router-link>
+        <div class="minPlay" v-show="ifshow" @click="show"></div>
       </div>
       <div class='body' ref = 'scorll'>
         <router-view class='test'></router-view>
       </div>
     </div>
     <v-play></v-play>
+    <transition name="fade" enter-active-class="animated bounceInLeft"
+    leave-active-class="animated flipOutY"> 
+      <v-playshow v-show="this.playshow"></v-playshow>
+    </transition>
   </div>
 </template>
 
 <script>
-// import BSscroll from 'better-scroll';
+import { mapState } from 'vuex';
 import play from './components/play';
+import playshow from './components/playshow';
 
 export default {
+  data() {
+    return {
+    };
+  },
   name: 'app',
-  mounted() {
-    this.$nextTick(() => {
-      this.initScroll();
-      // this.con();
-    });
+  computed: {
+    ...mapState({
+      misurl: state => state.musicUrl,
+      playshow: state => state.playshow,
+    }),
+    ifshow() {
+      if (this.misurl === null) {
+        return false;
+      } else {
+        return true;
+      }
+    },
   },
   methods: {
-    initScroll() {
-      // this.meunScroll = new BSscroll(this.$refs.scorll, {
-      //   click: true,
-      // });
-    },
-    con() {
-      this.$nextTick(() => {
-        this.initScroll();
-      });
-    },
-    g() {
-      this.meunScroll.getCurrentPage();
-      console.log(this.meunScroll);
+    show() {
+      this.$store.commit('changePlayShow');
     },
   },
   components: {
     'v-play': play,
+    'v-playshow': playshow,
   },
   watch: {
-    $route: 'con',
   },
 };
 </script>
 
 <style lang='scss'>
-// @import './common/sass/index.scss';
-
-// #app {
-//   /*font-family: 'Avenir', Helvetica, Arial, sans-serif;
-//   -webkit-font-smoothing: antialiased;
-//   -moz-osx-font-smoothing: grayscale;
-//   /*text-align: center;*/
-//   color: #2c3e50;
-//   background: yellow;
-// /*  margin: 0 auto;
-// /*  padding: 0;
-//   width: 1300px;
-//   box-shadow: 0 0 2px;*/
-//   height: 500px;
-//   width: 100px;
-// }
 #app {
   // overflow: hidden;
   text-align: center;
@@ -82,9 +72,19 @@ export default {
     position:relative;
     height: 500px;
     .side{
+      position:relative;
       flex: 0 1 200px;
-      // width: 100px;
       border: 1px solid red;
+      .minPlay{
+        width: 100%;
+        height: 100px;
+        position: absolute;
+        bottom: 0;
+        background: red;
+        .oshow {
+          background: yellow;
+        }
+      }
     }
     .body {
       display: flex;

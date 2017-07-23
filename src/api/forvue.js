@@ -1,11 +1,12 @@
 import axios from 'axios';
 import url from './urlconfig';
 
+const ourl = url.tovue;
 export default {
   getrecomList() {
-    return axios.get(url.recomList);
+    return axios.get(ourl.recomList);
   },
   getAppList(id) {
-    return axios.get(url.applistUrl + '?id=' + id);
+    return axios.get(ourl.applistUrl + id);
   },
 };

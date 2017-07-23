@@ -36,7 +36,7 @@ export default {
 
   },
   created() {
-    this.$store.commit('getB');
+    // this.$store.commit('getB');
     // console.log(this.$store.state.count);
   },
 };

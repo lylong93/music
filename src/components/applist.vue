@@ -2,10 +2,10 @@
   <div class="applist">
     <div class="applist-head">
       <div class="applist-head-covering">
-        <img :src="list.coverImgUrl" height="100%" width="100%" >
+        <!-- <img :src="list.coverImgUrl" height="100%" width="100%" > -->
       </div>
       <div class="applist-head-name">
-        <span>歌单</span>{{list.name}}
+        <!-- <span>歌单</span>{{list.name}} -->
         <div>lll</div>
       </div>
     </div>
@@ -23,8 +23,8 @@
           <th class='el-th'>歌手</th>
           <th class='el-th'>专辑</th>
         </tr>
-        <tr v-for="(item, index) in list.tracks" class="el-every" @click="addclass($event, index)" :class="{light: now(index)}"
-        @dblclick='toPlay()'>
+        <tr v-for="(item, index) in list.tracks" class="el-every" :data-id="item.id" @click="addclass($event, index)" :class="{light: now(index)}"
+        @dblclick='toPlay($event)'>
           <td>{{index+1}}</td>
           <td>*</td>
           <td>{{item.name}}</td>
@@ -52,21 +52,19 @@ export default {
     // console.log(this.$router);
   },
   computed: {
-    height() {
-
-    },
   },
   methods: {
     init() {
-      console.log(this.$route);
       const id = this.$route.query.id;
+      console.log(id);
       api.forvue.getAppList(id).then((res) => {
         this.list = res.data.playlist;
-        console.log(res);
+        // console.log(res);
       });
     },
     addclass(event, index) {
       this.d = index;
+      // console.log(event.currentTarget.dataset.id);
     },
     now(index) {
       if (this.d === index) {
@@ -75,8 +73,11 @@ export default {
         return false;
       }
     },
-    toPlay() {
-      console.log('to play');
+    toPlay(event) {
+      const id = event.currentTarget.dataset.id;
+      this.$store.commit('getMusicURl', id);
+      this.$store.commit('startPlay');
+      console.log(this.$store.state.musicState);
     },
   },
 };

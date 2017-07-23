@@ -2,7 +2,7 @@
   <div class="play-wrapper">
     <div class="play-contral">
       <div class="btn prev">prev</div>
-      <div class="btn" @click='wo()'>{{playState}}</div>
+      <div class="btn" @click='goplay()'>{{playStated}}</div>
       <div class="btn next" @click='go()'>next</div>
     </div>
     <div class="progress-wrapper">
@@ -17,7 +17,7 @@
   </div>
 </template>
 <script>
-// import formatDate from '.././common/js/date';
+import { mapState } from 'vuex';
 
 export default {
   data() {
@@ -26,32 +26,31 @@ export default {
       currentTime: 0,
       doo: 0,
       msg: 'play',
-      play: false,
-      misurl: 'http://dl.stream.qqmusic.qq.com/C4000017Aiq80Jdn6s.m4a?vkey=7004E36E5C9E0391877E7C57C567627EBBD9254A87A9788D1A32A846957F98E1C3EC7F351923587DE0ECCEDA80ACCA4827B6DE1EBFD45B5B&guid=2530953995&uin=0&fromtag=66',
+      // playState: false,
+      // misurl: null,
+      kk: this.test,
     };
   },
   watch: {
     currentTime() {
       this.do();
     },
+    playState() {
+      this.re();
+    },
+    misurl() {
+      this.ee();
+    },
   },
   methods: {
-    wo() {
-      this.play = !this.play;
-      this.d = this.$refs.hidPlay.duration;
-      // console.log(this.$refs.hidPlay.duration);
-      if (this.play === true) {
-        this.$refs.hidPlay.play();
-      } else {
-        this.$refs.hidPlay.pause();
-      }
+    goplay() {
+      this.$store.commit('changeState');
     },
     con() {
       this.currentTime = this.$refs.hidPlay.currentTime;
     },
     go() {
       this.$refs.i.style.width = '30px';
-      // console.log(this.$refs.i);
     },
     do() {
       const a = this.$refs.span.offsetWidth;
@@ -59,25 +58,43 @@ export default {
       const c = a / b;
       this.doo = this.doo + c;
       this.$refs.i.style.width = (c * this.currentTime) + 'px';
-      console.log(this.doo);
     },
     voice() {
       console.log(this.$refs.hidPlay.volume);
     },
+    re() {
+      if (this.playState === true) {
+        this.$refs.hidPlay.play();
+      } else {
+        this.$refs.hidPlay.pause();
+      }
+    },
+    ee() {
+      this.$refs.hidPlay.load();
+      /* eslint-disable , prefer-arrow-callback*/
+      /* 延迟执行 避免load和play冲突*/
+      const that = this;
+      setTimeout(function () {
+        console.log('hi');
+        that.$refs.hidPlay.play();
+      }, 1);
+    },
   },
   computed: {
-    playState() {
-      if (this.play) {
+    playStated() {
+      if (this.$store.state.musicState) {
         return '||';
       } else {
         return '^';
       }
     },
     duration() {
-      // console.log(this.$refs);
-      // this.d = this.$refs;
       return this.d;
     },
+    ...mapState({
+      playState: state => state.musicState,
+      misurl: state => state.musicUrl,
+    }),
   },
 };
 </script>
