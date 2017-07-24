@@ -49,7 +49,6 @@ export default {
   },
   created() {
     this.init();
-    // console.log(this.$router);
   },
   computed: {
   },
@@ -59,12 +58,10 @@ export default {
       console.log(id);
       api.forvue.getAppList(id).then((res) => {
         this.list = res.data.playlist;
-        // console.log(res);
       });
     },
     addclass(event, index) {
       this.d = index;
-      // console.log(event.currentTarget.dataset.id);
     },
     now(index) {
       if (this.d === index) {
@@ -77,7 +74,7 @@ export default {
       const id = event.currentTarget.dataset.id;
       this.$store.commit('getMusicURl', id);
       this.$store.commit('startPlay');
-      console.log(this.$store.state.musicState);
+      this.$store.commit('changeMusicId', id);
     },
   },
 };

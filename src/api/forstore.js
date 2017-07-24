@@ -12,4 +12,7 @@ export default {
   getMusicUrl(id) {
     return axios.get(ourl.musicUrl + id);
   },
+  getMusicLrc(id) {
+    return axios.get(ourl.musicLrc + id);
+  },
 };

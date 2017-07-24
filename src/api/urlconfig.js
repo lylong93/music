@@ -1,4 +1,3 @@
-
 const tovue = {
   bannerURl: 'api/banner',
   // applistUrl: 'api/playlist/detail?id=',
@@ -7,6 +6,7 @@ const tovue = {
 };
 const tostore = {
   musicUrl: 'api/music/url?id=',
+  musicLrc: 'api/lyric?id=',
 };
 export default {
   tovue,

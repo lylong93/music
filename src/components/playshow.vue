@@ -1,22 +1,46 @@
 <template>
   <div class="playshow">
-    <div class="closeBtn" @click="close"></div>
+    <div class="closeBtn" @click="close" ></div>
+    <div>{{lrc}}</div>
   </div>
 </template>
 <script>
-  export default {
-    data() {
-      return {
-      };
+import { mapState } from 'vuex';
+import initLrc from '.././common/js/initLrc';
+
+export default {
+  data() {
+    return {
+      d: 0,
+      // lrc: 333,
+    };
+  },
+  computed: {
+    ...mapState({
+      lrc: state => state.lrc,
+      playshow: state => state.playshow,
+      musicId: state => state.musicId,
+    }),
+  },
+  created() {
+    this.$store.commit('getMusicLrc', this.musicId);
+  },
+  watch: {
+    musicId() {
+      this.$store.commit('getMusicLrc', this.musicId);
+      console.log(this.musicId);
     },
-    methods: {
-      close() {
-        this.$store.commit('changePlayShow');
-      },
+  },
+  methods: {
+    close() {
+      this.$store.commit('changePlayShow');
     },
-    computed: {
+    test() {
+      const t1 = initLrc(2);
+      console.log(t1);
     },
-  };
+  },
+};
 
 </script>
 <style lang="scss">

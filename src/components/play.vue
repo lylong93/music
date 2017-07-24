@@ -26,8 +26,6 @@ export default {
       currentTime: 0,
       doo: 0,
       msg: 'play',
-      // playState: false,
-      // misurl: null,
       kk: this.test,
     };
   },
@@ -47,6 +45,7 @@ export default {
       this.$store.commit('changeState');
     },
     con() {
+      // console.log(this.currentTime);
       this.currentTime = this.$refs.hidPlay.currentTime;
     },
     go() {
