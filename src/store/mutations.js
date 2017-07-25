@@ -34,6 +34,9 @@ const mutations = {
   changeMusicId(state, id) {
     state.musicId = id;
   },
+  updataCurrentTime(state, time) {
+    state.currentTime = time;
+  },
 };
 
 export default mutations;

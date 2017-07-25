@@ -20,19 +20,39 @@
         <span class="copywriter">{{item.copywriter}}</span>
       </div>
     </div>
+    <div class="newSong">
+      <div class="list-head">
+        <span class="ns-head-title">最新音乐</span>
+        <span class="more">更多</span>
+      </div>
+      <div class="ns-body"> 
+        <div v-for="(item, index) in newSong" class='nsitem'>
+          <div class="nsit-index">{{index + 1}}</div>
+          <div class="nsit-pic">  
+            <img :src="item.song.album.picUrl" height="100%">
+          </div>
+          <div class="nsit-name">
+            <div>{{item.name}}</div>
+            <div>{{item.song.artists[0].name}}</div>
+          </div>
+          <!-- <div>{{item.name}}</div> -->
+      </div>
+      </div>
+    </div>
   </div>
 </template>
 <script>
 import carousel from './carousel';
 import api from '../api';
 
-const a = api.forvue.getrecomList();
-
+const getrecomList = api.forvue.getrecomList();
+const getPerNewSong = api.forvue.getPerNewSong();
 export default {
   data() {
     return {
       msg: 'one',
       list: [],
+      newSong: [],
     };
   },
   created() {
@@ -40,10 +60,16 @@ export default {
   },
   methods: {
     init() {
-      a.then((res) => {
+      getrecomList.then((res) => {
         const list = res.data.result.slice(0, 5);
         this.list = list;
-        // console.log(list);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+      getPerNewSong.then((res) => {
+        const newSong = res.data.result;
+        this.newSong = newSong;
       })
       .catch((err) => {
         console.log(err);
@@ -61,7 +87,6 @@ export default {
 </script> 
 <style lang="scss">
   .one{
-    min-height:700px;
     .tab{
       display: flex;
       justify-content: center;
@@ -159,6 +184,59 @@ export default {
           color:rgb(255,255,255);
         }
       }
+    }
+    .newSong{
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      .list-head{
+        border-bottom:1px solid red;
+        display: flex;
+        flex:1 1 1000px;
+        justify-content: space-between;
+        margin: 10px;
+        font-size: 25px;
+        line-height: 25px;
+        .more, .title {
+          margin: 0 30px 10px 30px;
+        }
+        .more{
+          font-size: 16px;
+        }
+        @media screen and (max-width: 480px) {
+          font-size: 12px;
+          line-height: 12px;
+          .more{
+            font-size: 12px;
+          }
+        }
+      }
+      .ns-body{
+        display: flex;
+        flex-wrap: wrap;
+        width: 96%;
+        border: 1px solid rgb(128,128,138);
+        .nsitem{
+          display: flex;
+          align-items:center;
+          flex:0 1 50%;
+          height: 55px;
+          .nsit-index{
+            margin: 0 10px;
+          }
+          .nsit-pic{
+            width: 40px;
+            height: 40px;
+          }
+          .nsit-name{
+            margin: 0 10px;
+          }
+          &:hover{
+            cursor: pointer;
+            background: rgba(128,128,128,.3);
+          }
+        }
+      }   
     }
   }
 </style>

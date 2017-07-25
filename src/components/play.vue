@@ -45,7 +45,8 @@ export default {
       this.$store.commit('changeState');
     },
     con() {
-      // console.log(this.currentTime);
+      const time = this.$refs.hidPlay.currentTime;
+      this.$store.commit('updataCurrentTime', time);
       this.currentTime = this.$refs.hidPlay.currentTime;
     },
     go() {

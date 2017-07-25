@@ -9,4 +9,7 @@ export default {
   getAppList(id) {
     return axios.get(ourl.applistUrl + id);
   },
+  getPerNewSong() {
+    return axios.get(ourl.personNewsongUrl);
+  },
 };

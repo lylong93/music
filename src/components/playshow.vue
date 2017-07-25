@@ -1,7 +1,10 @@
 <template>
   <div class="playshow">
     <div class="closeBtn" @click="close" ></div>
-    <div>{{lrc}}</div>
+    <div>{{currentTime}}</div>
+    <div>{{showlrc}}</div>
+    <!-- <div>{{ti}}</div> -->
+    <!-- <div>{{lrc}}</div> -->
   </div>
 </template>
 <script>
@@ -12,7 +15,8 @@ export default {
   data() {
     return {
       d: 0,
-      // lrc: 333,
+      // keys: [],
+      ti: 0,
     };
   },
   computed: {
@@ -20,7 +24,26 @@ export default {
       lrc: state => state.lrc,
       playshow: state => state.playshow,
       musicId: state => state.musicId,
+      currentTime: state => state.currentTime,
     }),
+    showlrc() {
+      const otime = this.currentTime;
+      const dtime = otime.toFixed(1);
+      const time = parseFloat(dtime);
+      // console.log(time);
+      let t = 0;
+      for (const key in this.lrc) {
+        if (Object.prototype.hasOwnProperty.call(this.lrc, key)) {
+          const ktime = parseFloat(key);
+          if (ktime <= time + 1.5 && ktime >= time - 1.5) {
+            this.ti = time;
+            t = ktime.toFixed(1);
+          }
+          // this.keys.push(key);
+        }
+      }
+      return this.lrc[t];
+    },
   },
   created() {
     this.$store.commit('getMusicLrc', this.musicId);
@@ -49,8 +72,7 @@ export default {
     top:70px;
     bottom: 70px;
     width: 100%;
-    // height: 190px;
-    // height: 900px;
+    z-index: 99;
     background: yellow;
     .closeBtn{
       width: 20px;

@@ -10,6 +10,7 @@ const state = {
   playshow: false,
   lrc: 123,
   musicId: null,
+  currentTime: 0,
   count: 6,
   banners: [],
   recomList: [],

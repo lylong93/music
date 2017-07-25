@@ -3,8 +3,8 @@
     <div class="head" @click="g()"></div>
     <div class="body-wrapper">
       <div class="side">
-        <router-link to="one" >one</router-link>
-        <router-link to="tow" >tow</router-link>
+        <router-link to="one" >发现音乐</router-link>
+        <router-link to="tow" >私人FM</router-link>
         <div class="minPlay" v-show="ifshow" @click="show"></div>
       </div>
       <div class='body' ref = 'scorll'>
@@ -69,17 +69,20 @@ export default {
   .body-wrapper {
     display: flex;
     width: 100%;
-    position:relative;
-    height: 500px;
+    position:absolute;
+    top:70px;
+    bottom: 75px;
     .side{
       position:relative;
-      flex: 0 1 200px;
+      flex: 0 1 300px;
       border: 1px solid red;
+      color: rgb(128, 128, 128);
       .minPlay{
         width: 100%;
         height: 100px;
         position: absolute;
         bottom: 0;
+        border-top:1px solid rgb(128, 128, 128);
         background: red;
         .oshow {
           background: yellow;
@@ -94,6 +97,7 @@ export default {
       background: rgb(255,255,123);
       .test{
         flex: 0 1 1000px;
+        width: 0;
         min-height: 700px;
         margin: 3px auto;
         background: rgb(255,255,255);
