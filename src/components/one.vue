@@ -87,6 +87,7 @@ export default {
 </script> 
 <style lang="scss">
   .one{
+    // background: red;
     .tab{
       display: flex;
       justify-content: center;
