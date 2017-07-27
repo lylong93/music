@@ -1,25 +1,41 @@
 <template>
   <div class="playshow">
-    <div class="closeBtn" @click="close" ></div>
-    <div>{{currentTime}}</div>
-    <div>{{showlrc}}</div>
-    <div>{{ti}}</div>
-    <!-- <div>{{lrc}}</div> -->
-    <div class="one">
-      <div class="tow"></div>
+    <div class="playshow-main">
+      <div class="playshow-main-head">
+        <div class="playshow-main-head-disc" @click="scrll">
+          <div class="tow"></div>
+        </div>
+        <div class="playshow-main-head-detal">
+          <div class="pmhd-player-wrapper">
+            <div class="pmhd-player-name">级</div>
+            <div class="pm-n-wr">
+              <span class="pm-n-i">专辑: {{this.num}}</span>
+              <span class="pm-n-i">歌手: xxx</span> 
+              <span class="pm-n-i">来源: xxx</span>
+            </div>
+          </div>
+          <div class="pmhd-lrc-wrapper"> 
+            <div class="pmhd-lrc" ref="sc">
+              <div v-for="(item, key, index) in this.lrc" :data-id ="key">{{key}}</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="gradient">
+      </div>
+      <div class="closeBtn" @click="close" ></div>
     </div>
   </div>
 </template>
 <script>
 import { mapState } from 'vuex';
-import initLrc from '.././common/js/initLrc';
 
 export default {
   data() {
     return {
       d: 0,
-      // keys: [],
       ti: 0,
+      num: 0,
     };
   },
   computed: {
@@ -29,43 +45,58 @@ export default {
       musicId: state => state.musicId,
       currentTime: state => state.currentTime,
     }),
-    showlrc() {
-      const otime = this.currentTime;
-      const dtime = otime.toFixed(1);
-      const time = parseFloat(dtime);
-      let t = 0;
-      for (const key in this.lrc) {
-        if (Object.prototype.hasOwnProperty.call(this.lrc, key)) {
-          const ktime = parseFloat(key);
-          if (ktime <= time + 1.5 && ktime >= time - 1.5) {
-            this.ti = time;
-            t = ktime.toFixed(1);
-          }
-          // this.keys.push(key);
-        }
-      }
-      return this.lrc[t];
-    },
-  },
-  created() {
-    this.$store.commit('getMusicLrc', this.musicId);
   },
   watch: {
     musicId() {
       this.$store.commit('getMusicLrc', this.musicId);
+      this.getlrc();
+    },
+    currentTime() {
+      this.num = this.num + 3;
+      // console.log(this.num);
+      this.scrll();
+      // this.getlrc();
     },
   },
   methods: {
     close() {
       this.$store.commit('changePlayShow');
     },
-    test() {
-      const t1 = initLrc(2);
-      console.log(t1);
+    scrll() {
+      this.$refs.sc.scrollTop = this.num;
+      const list = this.$refs.sc.childNodes;
+      // console.log(list);
+      const ok = this.currentTime;
+      const tt = ok.toFixed(1);
+      let un = -1;
+      for (const key in list) {
+        if (Object.prototype.hasOwnProperty.call(list, key)) {
+          const p = list[key].dataset.id;
+          const ddd = parseFloat(p);
+          if (ddd > tt - 1 && ddd < tt + 1) {
+            un = ddd;
+          }
+          console.log(un);
+        }
+      }
+      for (const key in list) {
+        if (un === -1) {
+          return;
+        } 
+        // if ()
+      }
+    },
+    getlrc() {
+      for (const key in this.lrc) {
+        if (Object.prototype.hasOwnProperty.call(this.lrc, key)) {
+          const ok = this.currentTime;
+          const tt = ok.toFixed(1);
+          console.log(tt);
+        }
+      }
     },
   },
 };
-
 </script>
 <style lang="scss">
   .playshow{
@@ -74,40 +105,88 @@ export default {
     bottom: 70px;
     width: 100%;
     z-index: 99;
-    background: yellow;
-    .closeBtn{
-      width: 20px;
-      height: 20px;
-      margin: 50px;
-      background: blue;
-    }
-    .one{
-      display: flex;
-      align-items:center;
-      justify-content:center;
-      margin-left:30px; 
-      width: 200px;
-      height: 200px;
-      background: linear-gradient(black,rgb(128,128,128),black);
-      box-shadow: 0 0 3px #999 inset;
-      border:1px solid black;
-      border-radius: 50%;
-      animation: myfirst 30s;
-      animation-iteration-count: infinite;
-      animation-timing-function: linear;
-      @keyframes myfirst
-      {
-        0% {transform:rotate(0deg) };
-       100% {transform:rotate(360deg)}; 
+    overflow: auto;
+    background: rgb(255,255,255);
+    .playshow-main {
+      width: 85%;
+      margin: 0 auto;
+      overflow: hidden;
+      .playshow-main-head{
+        display: flex;
+        justify-content: space-around;
+        background-image: url('../common/img/maikefen.jpg');
+        background-repeat: no-repeat;
+        background-size:100% 100%;
+        box-shadow:0 0 500px 500px rgba(255,255,255,.85) inset;
+        height: 400px;
+        .playshow-main-head-disc{
+          display: flex;
+          align-items:center;
+          justify-content:center;
+          margin-top: 70px; 
+          flex:0 0 330px;
+          height: 330px;
+          background: linear-gradient(black,rgb(128,128,128),black);
+          box-shadow: 0 0 3px #999 inset;
+          border:1px solid black;
+          border-radius: 50%;
+          animation: myfirst 30s;
+          animation-iteration-count: infinite;
+          animation-timing-function: linear;
+          @keyframes myfirst
+          {
+            0% {transform:rotate(0deg) };
+           100% {transform:rotate(360deg)}; 
+          }
+          .tow{
+            align-items:center;
+            line-height: 190px;
+            width: 160px;
+            height: 160px;
+            border-radius: 50%;
+            border:3px solid black;
+            background: rgb(255,255,255);
+          }
+        }
+        .playshow-main-head-detal{
+          margin-top:25px;
+          width: 500px;
+          .pmhd-player-wrapper{
+             margin-bottom: 20px;  
+            .pmhd-player-name{
+              font-size: 26px;
+            }
+            .pm-n-wr{
+              margin-top:18px; 
+              display: flex;
+              justify-content:space-around;
+              }
+          }
+          .pmhd-lrc-wrapper{
+            position: relative;
+            width: 100%;
+            height: 390px;
+            // background: red;
+            overflow: auto;
+            .pmhd-lrc{
+              position: absolute;
+              min-height: 700px;
+              width: 100%;
+              // background: yellow;
+            }
+          }
+        }
       }
-      .tow{
-        align-items:center;
-        line-height: 190px;
-        width: 140px;
-        height: 140px;
-        border-radius: 50%;
-        border:3px solid black;
-        background: rgb(255,255,255);
+      .gradient{
+        height: 100px;
+        width: 100%;
+        background: linear-gradient(rgba(128,128,128,.3),rgb(255,255,255));
+      }
+      .closeBtn{
+        width: 20px;
+        height: 20px;
+        margin: 50px;
+        background: blue;
       }
     }
   }

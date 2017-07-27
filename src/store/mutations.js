@@ -17,7 +17,7 @@ const mutations = {
       const lrc = res.data.lrc.lyric;
       const olrc = initLrc(lrc);
       state.lrc = olrc;
-      console.log(res);
+      console.log(state.lrc);
     }).catch((err) => {
       console.log(err);
     });
