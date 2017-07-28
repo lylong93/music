@@ -2,21 +2,24 @@
   <div class="playshow">
     <div class="playshow-main">
       <div class="playshow-main-head">
-        <div class="playshow-main-head-disc" @click="scrll">
-          <div class="tow"></div>
+        <div class="playshow-main-head-disc" @click="ddd">
+          <div class="tow">
+            <img :src="detail.songs[0].al.picUrl" width="100%"
+            >
+          </div>
         </div>
         <div class="playshow-main-head-detal">
           <div class="pmhd-player-wrapper">
-            <div class="pmhd-player-name">级</div>
+            <div class="pmhd-player-name">{{detail.songs[0].name}}</div>
             <div class="pm-n-wr">
-              <span class="pm-n-i">专辑: {{this.num}}</span>
-              <span class="pm-n-i">歌手: xxx</span> 
-              <span class="pm-n-i">来源: xxx</span>
+              <span class="pm-n-i">专辑: {{detail.songs[0].al.name}}</span>
+              <span class="pm-n-i">歌手: {{detail.songs[0].ar[0].name}}</span> 
+              <span class="pm-n-i">来源: 搜索页</span>
             </div>
           </div>
-          <div class="pmhd-lrc-wrapper"> 
+          <div class="pmhd-lrc-wrapper" ref="sco"> 
             <div class="pmhd-lrc" ref="sc">
-              <div v-for="(item, key, index) in this.lrc" :data-id ="key">{{key}}</div>
+              <div class="pmhd-lrc-item" v-for="(item, key, index) in this.lrc" :class="{h: test(key)}" :data-id ="key">{{item}}</div>
             </div>
           </div>
         </div>
@@ -44,55 +47,54 @@ export default {
       playshow: state => state.playshow,
       musicId: state => state.musicId,
       currentTime: state => state.currentTime,
+      detail: state => state.detail,
     }),
+    // test() {
+    //   return true;
+    // },
   },
   watch: {
     musicId() {
       this.$store.commit('getMusicLrc', this.musicId);
-      this.getlrc();
+      this.num = 0;
     },
     currentTime() {
-      this.num = this.num + 3;
-      // console.log(this.num);
       this.scrll();
-      // this.getlrc();
+      this.ddd();
     },
   },
   methods: {
     close() {
       this.$store.commit('changePlayShow');
     },
+    /*
+    歌词待优化
+     */
     scrll() {
-      this.$refs.sc.scrollTop = this.num;
       const list = this.$refs.sc.childNodes;
-      // console.log(list);
       const ok = this.currentTime;
       const tt = ok.toFixed(1);
-      let un = -1;
       for (const key in list) {
         if (Object.prototype.hasOwnProperty.call(list, key)) {
           const p = list[key].dataset.id;
           const ddd = parseFloat(p);
           if (ddd > tt - 1 && ddd < tt + 1) {
-            un = ddd;
+            this.num = key;
+            return;
           }
-          console.log(un);
         }
-      }
-      for (const key in list) {
-        if (un === -1) {
-          return;
-        } 
-        // if ()
       }
     },
-    getlrc() {
-      for (const key in this.lrc) {
-        if (Object.prototype.hasOwnProperty.call(this.lrc, key)) {
-          const ok = this.currentTime;
-          const tt = ok.toFixed(1);
-          console.log(tt);
-        }
+    ddd() {
+      this.$refs.sco.scrollTop = this.num * 20;
+    },
+    test(key) {
+      const o = parseFloat(key);
+      const d = parseFloat(this.currentTime);
+      if (o < d + 2 && o > d - 2) {
+        return true;
+      } else {
+        return false;
       }
     },
   },
@@ -141,11 +143,12 @@ export default {
           .tow{
             align-items:center;
             line-height: 190px;
-            width: 160px;
-            height: 160px;
+            width: 200px;
+            height: 200px;
             border-radius: 50%;
             border:3px solid black;
             background: rgb(255,255,255);
+            overflow: hidden;
           }
         }
         .playshow-main-head-detal{
@@ -172,7 +175,13 @@ export default {
               position: absolute;
               min-height: 700px;
               width: 100%;
-              // background: yellow;
+              .pmhd-lrc-item{
+                height:30px;
+                line-height: 30px;  
+              }
+              .h{
+                  color: red;
+                }
             }
           }
         }

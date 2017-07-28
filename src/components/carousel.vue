@@ -25,7 +25,6 @@ export default {
   },
   computed: {
     count() {
-      // console.log(this.$store.state.count);
       return this.$store.state.count;
     },
     cou() {
@@ -44,6 +43,7 @@ export default {
 
 <style lang='scss'>
   .block{
+    text-align: center;
     width: 1000px;
     .el-carousel__container{
         height: 200px;
@@ -66,11 +66,9 @@ export default {
     line-height: 150px;
     margin: 0;
   }
-
   .el-carousel__item:nth-child(2n) {
      background-color: #99a9bf;
   }
-  
   .el-carousel__item:nth-child(2n+1) {
      background-color: #d3dce6;
   }

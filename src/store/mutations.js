@@ -17,7 +17,15 @@ const mutations = {
       const lrc = res.data.lrc.lyric;
       const olrc = initLrc(lrc);
       state.lrc = olrc;
-      console.log(state.lrc);
+      // console.log(state.lrc);
+    }).catch((err) => {
+      console.log(err);
+    });
+  },
+  getMusicDetail(state, id) {
+    oapi.getMusicDetail(id).then((res) => {
+      state.detail = res.data;
+      // console.log(res.data);
     }).catch((err) => {
       console.log(err);
     });
@@ -31,11 +39,21 @@ const mutations = {
   changePlayShow(state) {
     state.playshow = !state.playshow;
   },
+  changeMinlist(state) {
+    state.minlist = !state.minlist;
+  },
   changeMusicId(state, id) {
     state.musicId = id;
   },
   updataCurrentTime(state, time) {
     state.currentTime = time;
+  },
+  /* 播放列表 */
+  addPalyList(state, n) {
+    state.playlist.push(n);
+    if (state.playlist.length > 100) {
+      state.playlist.splice(0, state.playlist.length);
+    }
   },
 };
 

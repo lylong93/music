@@ -8,12 +8,15 @@ const state = {
   musicUrl: null,
   musicState: false,
   playshow: false,
+  minlist: false,
   lrc: 123,
+  detail: 11,
   musicId: null,
   currentTime: 0,
   count: 6,
   banners: [],
   recomList: [],
+  playlist: [],
 };
 export default new Vuex.Store({
   state,

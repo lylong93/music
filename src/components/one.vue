@@ -2,10 +2,11 @@
   <div class="one">
     <div class="tab">
       <router-link to="one" class="now">个性推荐</router-link>
-      <router-link to="tow" >歌单</router-link>
-      <router-link to="tow" >歌手</router-link>
-      <router-link to="tow" >歌手</router-link>
-      <router-link to="tow" >歌手</router-link>
+      <router-link to="#" >歌单</router-link>
+      <router-link to="#" >主播电台</router-link>
+      <router-link to="#" >排行榜</router-link>
+      <router-link to="#" >歌手</router-link>
+      <router-link to="#" >最新音乐</router-link>
     </div>
     <v-carousel></v-carousel>
     <div class="list">
@@ -96,7 +97,7 @@ export default {
       margin-bottom: 10px;
       a{
         color:black;
-        margin: 0 30px;
+        margin: 0 20px;
         padding: 0 20px;
         text-decoration: none;
         &:hover{
@@ -112,9 +113,9 @@ export default {
         }
       }
       .now {
-        border-bottom: 3px solid red;
+        border-bottom: 3px solid #cb3d3d;
         margin: 0 0 -1px 0;
-        color: red;
+        color: #cb3d3d;
       }
     }
     .list {

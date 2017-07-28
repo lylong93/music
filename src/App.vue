@@ -21,23 +21,28 @@
         <div class="side-tab">
           <span class="s-t-title">收藏的歌单</span>
           <router-link to="#" class="s-t-every">我喜欢的音乐</router-link>
-          <router-link to="#" class="s-t-every">收藏</router-link>
+          <router-link to="#" class="s-t-every">收藏
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-fullscreen"></use>
+            </svg>
+          </router-link>
         </div>
-        <div class="minPlay" v-show="ifshow" @click="show">
+        <!-- <div class="minPlay" v-show="ifshow" @click="show">
           <div class="minPlay-pic">
-            <img src="">
+            <img :src="detail.songs[0].al.picUrl">
           </div>
           <div class="minPlay-detali">
-            <div class="m-d-name">失恋争先联盟蜢乐</div>
-            <div class="m-d-player">草蜢乐队</div>
+            <div class="m-d-name">{{detail.songs[0].name}}</div>
+            <div class="m-d-player">{{detail.songs[0].ar[0].name}}</div>
           </div>
-        </div>
+        </div> -->
       </div>
       <div class='body' ref = 'scorll'>
         <router-view class='test'></router-view>
       </div>
     </div>
     <v-play></v-play>
+    <div class="min-list" v-show="this.minlist">{{this.playlist.length}}</div>
     <transition name="fade" enter-active-class="animated bounceInLeft"
     leave-active-class="animated flipOutY"> 
       <v-playshow v-show="this.playshow"></v-playshow>
@@ -60,6 +65,9 @@ export default {
     ...mapState({
       misurl: state => state.musicUrl,
       playshow: state => state.playshow,
+      detail: state => state.detail,
+      minlist: state => state.minlist,
+      playlist: state => state.playlist,
     }),
     ifshow() {
       if (this.misurl === null) {
@@ -88,17 +96,17 @@ export default {
 
 <style lang='scss'>
 #app {
-  text-align: center;
+  // text-align: center;
   .head{
     width:100%;
-    height: 70px;
-    background: red;
+    height: 50px;
+    background: #cb3d3d;
   }
   .body-wrapper {
     display: flex;
     width: 100%;
     position:absolute;
-    top:70px;
+    top:50px;
     bottom: 75px;
     .side{
       display: flex;
@@ -115,8 +123,11 @@ export default {
         flex-direction:column;
         width: 100%;
         margin-top:8px;
+        font-size: 13px;
+        text-indent: 30px;
         .s-t-title{
           flex: 0 1 20px;
+          text-indent: 15px;
           color: rgba(0,0,0,.7);
         }
         .s-t-every{
@@ -138,14 +149,18 @@ export default {
         display: flex;
         align-items:center;
         width: 100%;
-        height: 80px;
+        height: 90px;
         position: absolute;
         bottom: 0;
         border-top:1px solid rgb(128, 128, 128);
+        color:black;
         .minPlay-pic{
           height: 79px;
           width: 79px;
-          background: yellow;
+          img{
+            width: 100%;
+            height: 100%;
+          }
         }
         .minPlay-detali{
           // display: felx;
@@ -163,7 +178,6 @@ export default {
               white-space:nowrap;
               text-overflow:ellipsis;
               overflow: hidden;
-              color:rgb(128,128,128);
           }
         }
         .oshow {
@@ -185,6 +199,15 @@ export default {
         background: rgb(255,255,255);
       }
     }
+  }
+  .min-list{
+    width: 35%;
+    height: 70%;
+    background: red;
+    position: fixed;
+    bottom: 70px;
+    right: 0px;
+    z-index: 90;
   }
 }
 </style>

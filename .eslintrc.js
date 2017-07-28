@@ -40,6 +40,7 @@ module.exports = {
     'no-else-return': [0],
     'prefer-template': [0],
     'no-restricted-syntax': [0],
+    'no-useless-return': [0],
     // allow debugger during development
     'no-debugger': process.env.NODE_ENV === 'production' ? 2 : 0
   }

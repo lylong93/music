@@ -45,6 +45,7 @@ export default {
       msg: 'one',
       list: {},
       d: null,
+      haveAdd: false,
     };
   },
   created() {
@@ -52,12 +53,17 @@ export default {
   },
   computed: {
   },
+  watch: {
+    list() {
+      this.haveAdd = false;
+    },
+  },
   methods: {
     init() {
       const id = this.$route.query.id;
-      console.log(id);
       api.forvue.getAppList(id).then((res) => {
         this.list = res.data.playlist;
+        console.log(this.list);
       });
     },
     addclass(event, index) {
@@ -75,6 +81,17 @@ export default {
       this.$store.commit('getMusicURl', id);
       this.$store.commit('startPlay');
       this.$store.commit('changeMusicId', id);
+      this.$store.commit('getMusicDetail', id);
+      if (this.haveAdd === true) {
+        return;
+      } else {
+        for (let i = 0; i < this.list.tracks.length; i += 1) {
+          console.log('go');
+          const n = this.list.tracks[i].id;
+          this.$store.commit('addPalyList', n);
+          this.haveAdd = true;
+        }
+      }
     },
   },
 };

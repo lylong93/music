@@ -12,6 +12,7 @@
       </span>
       <span class="progress-timeEnd">{{duration}}</span>
       <span class="progress-voice" @click="voice()">voice</span>
+      <span class="progress-list" @click="show()">list</span>
     </div>
     <audio class="audio" ref = 'hidPlay' @timeupdate='con' :src=misurl controls="controls"></audio>
   </div>
@@ -78,6 +79,9 @@ export default {
         console.log('hi');
         that.$refs.hidPlay.play();
       }, 1);
+    },
+    show() {
+      this.$store.commit('changeMinlist');
     },
   },
   computed: {
@@ -171,7 +175,13 @@ export default {
       .progress-voice {
         width: 30px;
         height: 30px;
-        margin: 30px;
+        margin: 20px;
+        background: black;
+      }
+      .progress-list {
+        width: 30px;
+        height: 30px;
+        margin: 20px;
         background: black;
       }
       @media screen and (max-width: 480px) {
@@ -181,5 +191,14 @@ export default {
     .audio {
       display: none;
     }
+  //   .min-list{
+  //   width: 35%;
+  //   height: 70%;
+  //   background: red;
+  //   position: fixed;
+  //   bottom: 70px;
+  //   right: 0px;
+  //   z-index: 90;
+  // }
   } 
 </style>
