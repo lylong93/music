@@ -1,6 +1,6 @@
 # music-app
 
-> 一个 Vue web版播放器
+> 一个 Vue web版播放器 <br>
 仅用于学习练习
 ## 技术使用
 使用Vuex管理数据，使用Axios请求<br> 
