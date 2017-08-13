@@ -1,30 +1,20 @@
 # music-app
 
-> A Vue.js project
+> 一个 Vue web版播放器 <br>
+仅用于学习练习
+## 技术使用
+使用Vuex管理数据，使用Axios请求<br> 
+后台使用了Binaryify提供的[API]（https://github.com/Binaryify/NeteaseCloudMusicApi）<br>
+现完成了主要组件开发
 
-## Build Setup
-
+## 项目运行
+打开api项目用作后台
+```bash
+node app.js
+```
+打开本项目
 ``` bash
-# install dependencies
-npm install
-
 # serve with hot reload at localhost:8080
 npm run dev
 
-# build for production with minification
-npm run build
-
-# build for production and view the bundle analyzer report
-npm run build --report
-
-# run unit tests
-npm run unit
-
-# run e2e tests
-npm run e2e
-
-# run all tests
-npm test
 ```
-
-For detailed explanation on how things work, checkout the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
