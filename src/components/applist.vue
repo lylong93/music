@@ -2,11 +2,20 @@
   <div class="applist">
     <div class="applist-head">
       <div class="applist-head-covering">
-        <!-- <img :src="list.coverImgUrl" height="100%" width="100%" > -->
+        <img :src="list.coverImgUrl" height="100%" width="100%" >
       </div>
       <div class="applist-head-name">
-        <!-- <span>歌单</span>{{list.name}} -->
-        <div>lll</div>
+        <span class="al-h-h">歌单</span><span class="al-h-t">{{list.name}}</span>
+        <div class="applist-h-i">
+          <span class="al-h-i"><img :src="list.creator.avatarUrl" height="100%" ></span>
+          <span class="al-h-n">{{list.creator.nickname}}</span>
+          <span class="al-h-time">2017-08-16创建</span>
+        </div> 
+        <div> &nbsp; </div>
+        <div class="applist-h-it">标签: &nbsp; &nbsp;
+          <span v-for="item in list.creator.expertTags" style="color:blue">{{item}}/</span>
+        </div> 
+        <div><span>简介: &nbsp; &nbsp;</span> <span class="applist-h-d">{{list.description}}</span></div>
       </div>
     </div>
     <div class="applist-main">
@@ -100,30 +109,78 @@ export default {
 .applist{
   .applist-head{
     height: 250px;
+    display: flex;
     .applist-head-covering{
-      // display: inline-block;
+      flex: 0 0 180px;
       width: 180px;
       height: 180px;
-      margin: 5px;
-      background: red;
+      margin: 10px 50px;
     }
     .applist-head-name{
-      display: inline-block;
-      vertical-align: top;
+      flex: 0 0 700px;
+      margin-top:10px;
+      .al-h-h{
+        display: inline-block;
+        height: 28px;
+        width: 50px;
+        line-height: 28px;
+        text-align: center;
+        font-size: 10px;
+        color:rgb(255,255,255);
+        background: rgb(203, 61, 61);
+       
+      }
+      .al-h-t{
+        margin-left: 8px;
+        font-size: 23px;
+        vertical-align: bottom;
+      }
+      .applist-h-i{
+        color: rgba(0, 0, 0, .5);
+        margin: 10px 0;
+        .al-h-i img{
+          display: inline-block;
+          height: 50px;
+          width: 50px;
+          border-radius: 50%;
+        }
+        .al-h-n{
+          font-size: 17px;
+          margin: 0 15px;
+          color:rgba(0, 0, 0, .7);
+        }
+        .al-h-time{
+          font-size: 15px;
+        }
+      }
+      .applist-h-it {
+        margin: 8px 0;
+      }
+      .applist-h-d{
+        display: inline-block;
+        height: 30px;
+        width: 500px;
+        font-size: 15px;
+        color:rgba(0, 0, 0, .7);
+        white-space:nowrap; 
+        text-overflow:ellipsis;
+        overflow: hidden;
+        vertical-align: top;
+      };
     }
   }
   .applist-main{
     .applist-main-head{
       height: 30px;
       padding: 0 30px;
-      border-bottom: 1px solid red;
+      border-bottom: 1px solid rgb(203, 61, 61);
       .a-m-h-tab{
         float: left;
         display: inline-block;
         width: 100px;
         line-height: 30px;
         margin: 0 3px;
-        background: red;
+        background: rgb(203, 61, 61);
         color:rgb(255,255,255);
       }
     }

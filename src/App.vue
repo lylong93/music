@@ -27,7 +27,7 @@
             </svg>
           </router-link>
         </div>
-        <!-- <div class="minPlay" v-show="ifshow" @click="show">
+        <div class="minPlay" v-if="ifshow" @click="show">
           <div class="minPlay-pic">
             <img :src="detail.songs[0].al.picUrl">
           </div>
@@ -35,7 +35,7 @@
             <div class="m-d-name">{{detail.songs[0].name}}</div>
             <div class="m-d-player">{{detail.songs[0].ar[0].name}}</div>
           </div>
-        </div> -->
+        </div>
       </div>
       <div class='body' ref = 'scorll'>
         <router-view class='test'></router-view>

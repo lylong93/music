@@ -1,6 +1,7 @@
 const tovue = {
   bannerURl: 'api/banner', // 轮播
-  applistUrl: 'https://bird.ioliu.cn/netease/playlist?id=', // 歌单详情，线上api
+  // applistUrl: 'https://bird.ioliu.cn/netease/playlist?id=', // 歌单详情，线上api
+  applistUrl: 'api/playlist/detail?id=',
   recomList: 'api/personalized', // 推荐歌单
   personNewsongUrl: 'api/personalized/newsong', // 新歌推荐
 };
