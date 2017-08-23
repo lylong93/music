@@ -1,18 +1,41 @@
 <template>
   <div class="play-wrapper">
     <div class="play-contral">
-      <div class="btn prev">prev</div>
-      <div class="btn" @click='goplay()'>{{playStated}}</div>
-      <div class="btn next" @click='go()'>next</div>
+      <div class="btn prev">
+        <svg class="icon" aria-hidden="true" >
+          <use xlink:href="#icon-shangyige"></use>
+        </svg>
+      </div>
+      <div class="btn" @click='goplay()'>
+        <svg v-show="this.$store.state.musicState" class="icon" aria-hidden="true">
+          <use xlink:href="#icon-pause"></use>
+        </svg>
+        <svg v-show="!this.$store.state.musicState" class="icon" aria-hidden="true">
+          <use xlink:href="#icon-play"></use>
+        </svg>
+      </div>
+      <div class="btn next" @click='go()'>
+        <svg class="icon" aria-hidden="true">
+          <use xlink:href="#icon-xiayige"></use>
+        </svg>
+      </div>
     </div>
     <div class="progress-wrapper">
-      <span class="progress-time">{{currentTime}}</span>
+      <span class="progress-time">{{ currentTime | initTime }}</span>
       <span ref= "span" @click="go()" class="progress-bar" >
-        <i ref="i" class="progress-scroll">k</i>
+        <i ref="i" class="progress-scroll"></i>
       </span>
-      <span class="progress-timeEnd">{{duration}}</span>
-      <span class="progress-voice" @click="voice()">voice</span>
-      <span class="progress-list" @click="show()">list</span>
+      <span class="progress-timeEnd">{{duration | initTime}}</span>
+      <span class="progress-voice" @click="voice()">
+        <svg class="icon" aria-hidden="true">
+          <use xlink:href="#icon-weibiaoti102"></use>
+        </svg>
+      </span>
+      <span class="progress-list" @click="show()">
+        <svg class="icon" aria-hidden="true">
+          <use xlink:href="#icon-iconfuzhi"></use>
+        </svg>
+      </span>
     </div>
     <audio class="audio" ref = 'hidPlay' @timeupdate='con' :src=misurl controls="controls"></audio>
   </div>
@@ -28,6 +51,7 @@ export default {
       doo: 0,
       msg: 'play',
       kk: this.test,
+      duration: 0,
     };
   },
   watch: {
@@ -49,6 +73,7 @@ export default {
       const time = this.$refs.hidPlay.currentTime;
       this.$store.commit('updataCurrentTime', time);
       this.currentTime = this.$refs.hidPlay.currentTime;
+      this.duration = this.$refs.hidPlay.duration;
     },
     go() {
       this.$refs.i.style.width = '30px';
@@ -85,13 +110,6 @@ export default {
     },
   },
   computed: {
-    playStated() {
-      if (this.$store.state.musicState) {
-        return '||';
-      } else {
-        return '^';
-      }
-    },
     duration() {
       return this.d;
     },
@@ -99,6 +117,22 @@ export default {
       playState: state => state.musicState,
       misurl: state => state.musicUrl,
     }),
+  },
+  filters: {
+    initTime(value) {
+      const v = Math.floor(value);
+      let t = Math.floor(v / 60);
+      if (t < 10) {
+        t = '0' + t;
+      }
+      let s = v - (t * 60);
+      if (s < 10) {
+        s = '0' + s;
+      }
+      console.log(v / 60);
+      console.log(t);
+      return t + ':' + s;
+    },
   },
 };
 </script>
@@ -126,6 +160,7 @@ export default {
         height: 50px;
         line-height: 50px;
         border-radius: 50%;
+        text-align: center;
         background: rgb(203,61,61);
         color: rgb(255,255,255);
         &:hover {
@@ -137,6 +172,7 @@ export default {
         width: 40px;
         height: 40px;
         line-height: 40px;
+        text-align: center;
       }
     }
     .progress-wrapper {
@@ -147,7 +183,7 @@ export default {
       // background: yellow;
       margin-left:50px;
       .progress-bar {
-        margin:30px 30px;
+        margin:35px 30px;
         flex:5 1 400px;
         position: relative;
         width: 400px;
@@ -168,21 +204,22 @@ export default {
       .progress-time, .progress-timeEnd{
         margin:30px 10px;
         flex:0 1 50px;
-        background: red;
         width: 50px;
         height: 20px;
       }
       .progress-voice {
-        width: 30px;
-        height: 30px;
-        margin: 20px;
-        background: black;
+        width: 50px;
+        height: 50px;
+        margin: 18px 5px;
+        font-size: 30px;
+        // background: black;
       }
       .progress-list {
         width: 30px;
         height: 30px;
-        margin: 20px;
-        background: black;
+        margin: 18px 5px; 
+        font-size: 30px;
+        // background: black;
       }
       @media screen and (max-width: 480px) {
         display: none;

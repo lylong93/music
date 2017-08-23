@@ -22,9 +22,9 @@
           <span class="s-t-title">收藏的歌单</span>
           <router-link to="#" class="s-t-every">我喜欢的音乐</router-link>
           <router-link to="#" class="s-t-every">收藏
-            <svg class="icon" aria-hidden="true">
+            <!-- <svg class="icon" aria-hidden="true">
               <use xlink:href="#icon-fullscreen"></use>
-            </svg>
+            </svg> -->
           </router-link>
         </div>
         <div class="minPlay" v-if="ifshow" @click="show">
