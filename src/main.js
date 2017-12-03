@@ -1,8 +1,7 @@
-// The Vue build version to load with the `import` command
-// (runtime-only or standalone) has been set in webpack.base.conf with an alias.
 import Vue from 'vue';
 import Vuex from 'vuex';
 import ElementUI from 'element-ui';
+import VueLazyLoad from 'vue-lazyload';
 import 'element-ui/lib/theme-default/index.css';
 import App from './App';
 import router from './router';
@@ -15,7 +14,13 @@ Vue.config.productionTip = false;
 /* eslint-disable no-new */
 Vue.use(ElementUI);
 Vue.use(Vuex);
-// console.log(store.state.count);
+Vue.use(VueLazyLoad, {
+  preLoad: 1.3,
+  /* eslint-disable */
+  error: require('./common/img/maikefen.jpg'),
+  loading: require('./face.jpg'),
+  attempt: 1,
+});
 
 new Vue({
   el: '#app',

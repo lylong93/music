@@ -179,6 +179,7 @@ export default {
         display: inline-block;
         width: 100px;
         line-height: 30px;
+        text-align: center;
         margin: 0 3px;
         background: rgb(203, 61, 61);
         color:rgb(255,255,255);

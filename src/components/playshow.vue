@@ -103,7 +103,7 @@ export default {
 <style lang="scss">
   .playshow{
     position: fixed;
-    top:70px;
+    top:50px;
     bottom: 70px;
     width: 100%;
     z-index: 99;

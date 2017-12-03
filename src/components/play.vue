@@ -2,7 +2,7 @@
   <div class="play-wrapper">
     <div class="play-contral">
       <div class="btn prev">
-        <svg class="icon" aria-hidden="true" >
+        <svg class="icon" aria-hidden="true">
           <use xlink:href="#icon-shangyige"></use>
         </svg>
       </div>
@@ -22,7 +22,7 @@
     </div>
     <div class="progress-wrapper">
       <span class="progress-time">{{ currentTime | initTime }}</span>
-      <span ref= "span" @click="go()" class="progress-bar" >
+      <span ref="span" @click="go()" class="progress-bar">
         <i ref="i" class="progress-scroll"></i>
       </span>
       <span class="progress-timeEnd">{{duration | initTime}}</span>
@@ -37,7 +37,7 @@
         </svg>
       </span>
     </div>
-    <audio class="audio" ref = 'hidPlay' @timeupdate='con' :src=misurl controls="controls"></audio>
+    <audio class="audio" ref='hidPlay' @timeupdate='con' :src=misurl controls="controls"></audio>
   </div>
 </template>
 <script>
@@ -97,10 +97,10 @@ export default {
     },
     ee() {
       this.$refs.hidPlay.load();
-      /* eslint-disable , prefer-arrow-callback*/
-      /* 延迟执行 避免load和play冲突*/
+      /* eslint-disable , prefer-arrow-callback */
+      /* 延迟执行 避免load和play冲突 */
       const that = this;
-      setTimeout(function () {
+      setTimeout(() => {
         console.log('hi');
         that.$refs.hidPlay.play();
       }, 1);
@@ -135,100 +135,96 @@ export default {
     },
   },
 };
+
 </script>
 <style lang="scss">
-  .play-wrapper{
-    display: flex;
-    position: fixed;
-    bottom:0;
-    width: 100%;
-    height: 70px;
-    border: 1px solid rgb(128,128,128);
-    background: rgb(255,255,255);
-    .play-contral {
-      flex:0 1 200px;
-      display: flex;
-      // flex: 0 1 100px;
-      align-items:center;
-      justify-content:space-between;
-      // width: 200px;
-      height: 70px;
-      // border: 1px solid black;
-      margin: 0 20px;
-      .btn{
-        width: 50px;
-        height: 50px;
-        line-height: 50px;
-        border-radius: 50%;
-        text-align: center;
-        background: rgb(203,61,61);
-        color: rgb(255,255,255);
-        &:hover {
-          cursor: pointer;
-          background:rgb(192,52,52);
-        }
-      }
-      .prev, .next {
-        width: 40px;
-        height: 40px;
-        line-height: 40px;
-        text-align: center;
-      }
-    }
-    .progress-wrapper {
-      display: flex;
-      flex: 1 1 300px;
-      width: 300px;
-      // line-height: 70px;;
-      // background: yellow;
-      margin-left:50px;
-      .progress-bar {
-        margin:35px 30px;
-        flex:5 1 400px;
-        position: relative;
-        width: 400px;
-        height: 6px;
+.play-wrapper {
+  display: flex;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  height: 70px;
+  border: 1px solid rgb(128, 128, 128);
+  background: rgb(255, 255, 255);
+  .play-contral {
+    flex: 0 1 200px;
+    display: flex; // flex: 0 1 100px;
+    align-items: center;
+    justify-content: space-between; // width: 200px;
+    height: 70px; // border: 1px solid black;
+    margin: 0 20px;
+    .btn {
+      width: 50px;
+      height: 50px;
+      line-height: 50px;
+      border-radius: 50%;
+      text-align: center;
+      background: rgb(203, 61, 61);
+      color: rgb(255, 255, 255);
+      &:hover {
         cursor: pointer;
-        border-radius: 10px;
-        background: rgb(128,128,128);
-        .progress-scroll {
-          position: absolute;
-          top: 0;
-          left: 0;
-          height: 6px;
-          width: 10px;
-          border-radius: 10px;
-          background: red;
-        }
-      }
-      .progress-time, .progress-timeEnd{
-        margin:30px 10px;
-        flex:0 1 50px;
-        width: 50px;
-        height: 20px;
-      }
-      .progress-voice {
-        width: 50px;
-        height: 50px;
-        margin: 18px 5px;
-        font-size: 30px;
-        // background: black;
-      }
-      .progress-list {
-        width: 30px;
-        height: 30px;
-        margin: 18px 5px; 
-        font-size: 30px;
-        // background: black;
-      }
-      @media screen and (max-width: 480px) {
-        display: none;
+        background: rgb(192, 52, 52);
       }
     }
-    .audio {
+    .prev,
+    .next {
+      width: 40px;
+      height: 40px;
+      line-height: 40px;
+      text-align: center;
+    }
+  }
+  .progress-wrapper {
+    display: flex;
+    flex: 1 1 300px;
+    width: 300px; // line-height: 70px;;
+    // background: yellow;
+    margin-left: 50px;
+    .progress-bar {
+      margin: 35px 30px;
+      flex: 5 1 400px;
+      position: relative;
+      width: 400px;
+      height: 6px;
+      cursor: pointer;
+      border-radius: 10px;
+      background: rgb(128, 128, 128);
+      .progress-scroll {
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 6px;
+        width: 10px;
+        border-radius: 10px;
+        background: red;
+      }
+    }
+    .progress-time,
+    .progress-timeEnd {
+      margin: 30px 10px;
+      flex: 0 1 50px;
+      width: 50px;
+      height: 20px;
+    }
+    .progress-voice {
+      width: 50px;
+      height: 50px;
+      margin: 18px 5px;
+      font-size: 30px; // background: black;
+    }
+    .progress-list {
+      width: 30px;
+      height: 30px;
+      margin: 18px 5px;
+      font-size: 30px; // background: black;
+    }
+    @media screen and (max-width: 480px) {
       display: none;
     }
-  //   .min-list{
+  }
+  .audio {
+    display: none;
+  } //   .min-list{
   //   width: 35%;
   //   height: 70%;
   //   background: red;
@@ -237,5 +233,6 @@ export default {
   //   right: 0px;
   //   z-index: 90;
   // }
-  } 
+}
+
 </style>
