@@ -1,13 +1,6 @@
 <template>
   <div class="one">
-    <div class="tab">
-      <router-link to="one" class="now">个性推荐</router-link>
-      <router-link to="#">歌单</router-link>
-      <router-link to="#">主播电台</router-link>
-      <router-link to="#">排行榜</router-link>
-      <router-link to="songs">歌手</router-link>
-      <router-link to="#">最新音乐</router-link>
-    </div>
+    <v-topRoute/>
     <v-carousel></v-carousel>
     <div class="list">
       <div class="list-head">
@@ -43,7 +36,9 @@
   </div>
 </template>
 <script>
+import topRoute from '@/base/topRoute';
 import carousel from './carousel';
+
 import api from '../api';
 
 const getrecomList = api.forvue.getrecomList();
@@ -81,42 +76,13 @@ export default {
   },
   components: {
     'v-carousel': carousel,
+    'v-topRoute': topRoute,
   },
 };
 
 </script>
 <style lang="scss">
 .one {
-  // background: red;
-  .tab {
-    display: flex;
-    justify-content: center;
-    height: 30px;
-    border-bottom: 1px solid black;
-    margin-bottom: 10px;
-    a {
-      color: black;
-      margin: 0 20px;
-      padding: 0 20px;
-      text-decoration: none;
-      &:hover {
-        color: red;
-      }
-    }
-    @media screen and (max-width: 480px) {
-      justify-content: space-around;
-      a {
-        margin: 0;
-        padding: 0;
-        font-size: 12px;
-      }
-    }
-    .now {
-      border-bottom: 3px solid #cb3d3d;
-      margin: 0 0 -1px 0;
-      color: #cb3d3d;
-    }
-  }
   .list {
     display: flex;
     flex-wrap: wrap;
@@ -130,7 +96,6 @@ export default {
       margin: 10px;
       font-size: 25px;
       line-height: 25px;
-      .more,
       .title {
         margin: 0 30px 10px 30px;
       }

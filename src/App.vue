@@ -1,79 +1,33 @@
 <template>
   <div id="app">
-    <div class="head" @click="g()"></div>
+    <div class="head"></div>
     <div class="body-wrapper">
       <div class="side">
-        <div class="side-tab">
-          <span class="s-t-title" @click="dd">推荐</span>
-          <router-link to="one" class="s-t-every" :class="{slight: (this.$route.name === 'one' )}">发现音乐</router-link>
-          <router-link to="tow" class="s-t-every">私人FM</router-link>
-          <router-link to="#" class="s-t-every">MV</router-link>
-          <router-link to="#" class="s-t-every">朋友</router-link>
-        </div>
-        <div class="side-tab">
-          <span class="s-t-title">我的音乐</span>
-          <router-link to="#" class="s-t-every">本地音乐</router-link>
-          <router-link to="#" class="s-t-every">下载管理</router-link>
-          <router-link to="#" class="s-t-every">我的音乐云盘</router-link>
-          <router-link to="#" class="s-t-every">我的歌手</router-link>
-          <router-link to="#" class="s-t-every">我的MV</router-link>
-        </div>
-        <div class="side-tab">
-          <span class="s-t-title">收藏的歌单</span>
-          <router-link to="#" class="s-t-every">我喜欢的音乐</router-link>
-          <router-link to="#" class="s-t-every">收藏
-            <!-- <svg class="icon" aria-hidden="true">
-              <use xlink:href="#icon-fullscreen"></use>
-            </svg> -->
-          </router-link>
-        </div>
-        <div class="minPlay" v-if="ifshow" @click="show">
-          <div class="minPlay-pic">
-            <img :src="detail.songs[0].al.picUrl">
-          </div>
-          <div class="minPlay-detali">
-            <div class="m-d-name">{{detail.songs[0].name}}</div>
-            <div class="m-d-player">{{detail.songs[0].ar[0].name}}</div>
-          </div>
-        </div>
+        <v-item/>
+        <v-minPlay v-if="ifshow" />
       </div>
-      <div class='body' ref = 'scorll'>
+      <div class='body'>
         <router-view class='test'></router-view>
       </div>
     </div>
-    <v-play></v-play>
-    <div class="min-list" v-show="this.minlist">
-        <div class="min-list-head">
-          <span class="m-l-h-l m-l-height">播放列表</span>
-          <span class="m-l-h-l">历史记录</span>
-        </div>
-        <div class="min-list-body">
-          <div class="min-list-body-t">
-            <span>总{{this.playlist.length}}首</span>
-            <span>
-              <span>收藏全部</span>
-              <span>清单</span>
-            </span>
-          </div>
-        {{this.playlist}}
-        </div>
-    </div>
-    <transition name="fade" enter-active-class="animated bounceInLeft"
-    leave-active-class="animated flipOutY"> 
+    <v-play/>
+    <v-minList v-show="this.minlist" />
+    <transition name="fade" enter-active-class="animated bounceInLeft" leave-active-class="animated flipOutY">
       <v-playshow v-show="this.playshow"></v-playshow>
     </transition>
   </div>
 </template>
-
 <script>
 import { mapState } from 'vuex';
 import play from './components/play';
 import playshow from './components/playshow';
+import item from './components/item';
+import minPlay from './components/minPlay';
+import minList from './components/minList';
 
 export default {
   data() {
-    return {
-    };
+    return {};
   },
   name: 'app',
   computed: {
@@ -103,161 +57,50 @@ export default {
   components: {
     'v-play': play,
     'v-playshow': playshow,
-  },
-  watch: {
+    'v-item': item,
+    'v-minPlay': minPlay,
+    'v-minList': minList,
   },
 };
-</script>
 
+</script>
 <style lang='scss'>
 #app {
-  // text-align: center;
-  .head{
-    width:100%;
+  .head {
+    width: 100%;
     height: 50px;
     background: #cb3d3d;
   }
   .body-wrapper {
     display: flex;
     width: 100%;
-    position:absolute;
-    top:50px;
+    position: absolute;
+    top: 50px;
     bottom: 75px;
-    .side{
+    .side {
       display: flex;
-      flex-direction:column;
-      position:relative;
+      flex-direction: column;
+      position: relative;
       flex: 0 1 220px;
-      border: 1px solid rgba(128,128,128,0.15);
+      border: 1px solid rgba(128, 128, 128, 0.15);
       overflow: auto;
-      overflow-x:hidden;
-      background: rgba(128,128,128,0.15);
-      .side-tab{
-        display: block;
-        display: flex;
-        flex-direction:column;
-        width: 100%;
-        margin-top:8px;
-        font-size: 13px;
-        text-indent: 30px;
-        .s-t-title{
-          flex: 0 1 20px;
-          text-indent: 15px;
-          color: rgba(0,0,0,.7);
-        }
-        .s-t-every{
-          width: 100%;
-          flex: 1 1 28px;
-          line-height: 28px;
-          color: rgba(0,0,0,.5);
-          &:hover{
-            cursor:pointer;
-            color: rgba(0,0,0,1);
-          }
-        }
-        .slight{
-          background: rgba(128,128,128,.3);
-          color: rgba(0,0,0,1);
-        }
-      }
-      .minPlay{
-        display: flex;
-        align-items:center;
-        width: 100%;
-        height: 90px;
-        position: absolute;
-        bottom: 0;
-        border-top:1px solid rgb(128, 128, 128);
-        color:black;
-        .minPlay-pic{
-          height: 79px;
-          width: 79px;
-          img{
-            width: 100%;
-            height: 100%;
-          }
-        }
-        .minPlay-detali{
-          // display: felx;
-          // align-items:center;     
-          flex:0 1 110px;
-          height: 60px;
-          margin: 0 10px;
-          // background: blue;
-          .m-d-name,.m-d-player{
-              height: 30px;
-              width: 110px;
-              // border: 1px solid red;
-              font-size: 14px;
-              text-align: 30px;
-              white-space:nowrap;
-              text-overflow:ellipsis;
-              overflow: hidden;
-          }
-        }
-        .oshow {
-          background: yellow;
-        }
-      }
+      overflow-x: hidden;
+      background: rgba(128, 128, 128, 0.15);
     }
     .body {
       display: flex;
       flex: 9 1 auto;
       overflow: auto;
-      justify-conten:center;
-      // background: rgb(255,255,123);
-      .test{
+      justify-conten: center;
+      background: rgb(255, 255, 123);
+      .test {
         flex: 0 1 1000px;
         width: 0;
-        min-height: 700px;
-        margin: 3px auto;
-        background: rgb(255,255,255);
-      }
-    }
-  }
-  .min-list{
-    width: 37%;
-    height: 70%;
-    background: rgb(255,255,255);
-    box-shadow: -1px -1px 1px black;
-    position: fixed;
-    bottom: 70px;
-    right: 0px;
-    z-index: 90;
-    .min-list-head{
-      display: flex;
-      justify-content:center;
-      height: 50px;
-      width: 100%;
-      background: rgba(147,147,147,.2);
-      font-size: 0;
-      .m-l-h-l{
-        // display: inline-block;
-        font-size:16px;
-        width: 100px;
-        height: 30px;
-        margin:auto 0;
-        line-height: 30px;
-        text-align:center;
-        border:1px solid rgba(147,147,147,.3);
-        background: rgb(255,255,255);
-      }
-      .m-l-height{
-        background: rgb(147,147,147);
-        color:rgb(255,255,255);
-      }
-    }
-    .min-list-body{
-      .min-list-body-t{
-        display: flex;
-        justify-content:space-between;
-        padding: 0 30px;
-        border:1px solid rgba(147,147,147,.3);
-        line-height: 30px;
-        font-size: 16px;
-        
+        margin: 0 auto;
+        background: rgb(255, 255, 255);
       }
     }
   }
 }
+
 </style>

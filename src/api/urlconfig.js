@@ -4,6 +4,7 @@ const tovue = {
   applistUrl: 'api/playlist/detail?id=',
   recomList: 'api/personalized', // 推荐歌单
   personNewsongUrl: 'api/personalized/newsong', // 新歌推荐
+  songsList: 'api/top/artists', // 歌手列表
 };
 const tostore = {
   musicUrl: 'api/music/url?id=', // 播放地址

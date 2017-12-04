@@ -12,4 +12,7 @@ export default {
   getPerNewSong() {
     return axios.get(ourl.personNewsongUrl);
   },
+  getSongsList(page) {
+    return axios.get(ourl.songsList + `?offset=${page}&limit=30`);
+  },
 };
