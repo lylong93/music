@@ -1,12 +1,11 @@
 <template>
   <div class="tab">
     <router-link to="one">个性推荐</router-link>
-    <router-link to="#"
->歌单</router-link>
-    <router-link to="#">主播电台</router-link>
+    <router-link to="#">歌单</router-link>
+    <!-- <a to="#">主播电台</a> -->
     <router-link to="#">排行榜</router-link>
     <router-link to="songs">歌手</router-link>
-    <router-link to="#">最新音乐</router-link>
+    <!--     <a to="#">最新音乐</a> -->
   </div>
 </template>
 <script>

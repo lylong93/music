@@ -4,18 +4,18 @@
     <div>
       <div>语种
         <span v-for="item in lang">
-        	{{item}}
+          {{item}}
         </span>
       </div>
       <div>筛选
-        <span v-for="item in 26">	
-      		{{String.fromCharCode(64+item)}}
-      	</span>
+        <span v-for="item in 26"> 
+          {{String.fromCharCode(64+item)}}
+        </span>
       </div>
     </div>
     <v-loading v-show="this.songsList.length === 0"></v-loading>
     <div>
-      <div v-for="item in songsList">
+      <div v-for="item in songsList" :key="item.id" @click='detail(item.id)'>
         <div>
           <img v-lazy="item.picUrl"></img>
         </div>
@@ -69,6 +69,12 @@ export default {
           return;
         }
       });
+    },
+    detail(id) {
+      // const id = event.currentTarget.dataset.id;
+      const tab = 2;
+      this.$router.push({ path: 'applist', query: { id, tab } });
+      console.log(id);
     },
   },
   components: {
