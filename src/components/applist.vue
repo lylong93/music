@@ -7,6 +7,7 @@
 <script>
 import appListHead from '@/components/appListHead';
 import appListMain from '@/components/appListMain';
+import { SongSheet, Evalbum, Album } from '@/common/js/filterList';
 import api from '../api';
 
 export default {
@@ -14,6 +15,8 @@ export default {
     return {
       msg: 'one',
       list: {},
+      songList: [],
+      listHead: {},
       d: null,
       haveAdd: false,
       tab: '',
@@ -21,9 +24,10 @@ export default {
   },
   created() {
     this.init();
-    // console.log(this.list);
+    // this.filterSongSheet();
+    this.filerEvalbum();
+    // this.filerAlbum();
   },
-  computed() {},
   watch: {
     list() {
       this.haveAdd = false; // 已经添加到列表
@@ -36,11 +40,82 @@ export default {
       api.forvue.getAppList(id).then((res) => {
         this.list = res.data.playlist;
         this.tab = tab;
-        console.log(this.list);
       });
     },
-    addclass(event, index) {
-      this.d = index;
+    // 歌单
+    filterSongSheet() {
+      const id = this.$route.query.id;
+      api.forvue.getAppList(id).then((res) => {
+        const odata = res.data;
+        this.listHead = {
+          coverImgUrl: odata.coverImgUrl,
+          description: odata.description,
+          tags: odata.tags,
+          name: odata.name,
+          createTime: odata.createTime,
+          trackCount: odata.trackCount,
+          playCount: odata.playCount,
+          commentCount: odata.commentCount,
+          nickname: odata.nickname,
+        };
+        const data = odata.playlist.tracks;
+        data.forEach((item) => {
+          const itemid = item.id;
+          const name = item.name;
+          const song = item.ar;
+          const album = item.al;
+
+          const obj = new SongSheet(itemid, name, song, album);
+          this.songList.push(obj);
+        });
+      });
+    },
+    // 歌手
+    filerEvalbum() {
+      const id = 6452;
+      api.forvue.getsongAlbum(id).then((res) => {
+        const odata = res.data;
+        this.listHead = {
+          picUrl: odata.picUrl,
+          name: odata.name,
+          alias: odata.alias,
+          musicSize: odata.musicSize,
+          albumSize: odata.albumSize,
+        };
+        const data = odata.hotAlbums;
+        data.forEach((item) => {
+          const avart = item.picUrl;
+          const name = item.name;
+          const itemid = item.id;
+          const time = item.publishTime;
+          const obj = new Evalbum(avart, time, itemid, name);
+          this.songList.push(obj);
+          console.log(this.songList);
+        });
+      });
+    },
+    // 专辑
+    filerAlbum() {
+      const id = 18907;
+      api.forvue.getalbumDetail(id).then((res) => {
+        const odata = res.data;
+        this.listHead = {
+          name: odata.album.name,
+          picUrl: odata.album.picUrl,
+          publishTime: odata.album.publishTime,
+          commentCount: odata.album.info.commentCount,
+        };
+        const data = odata.songs;
+        data.forEach((item) => {
+          const name = item.name;
+          const song = item.ar;
+          const album = item.al;
+          const time = item.dt;
+
+          const obj = new Album(name, song, album, time);
+          this.songList.push(obj);
+        });
+      });
     },
   },
   components: {
@@ -51,50 +126,6 @@ export default {
 
 </script>
 <style lang='scss'>
-// .applist {
-//   .applist-main {
-//     .applist-main-head {
-//       height: 30px;
-//       padding: 0 30px;
-//       border-bottom: 1px solid rgb(203, 61, 61);
-//       .a-m-h-tab {
-//         float: left;
-//         display: inline-block;
-//         width: 100px;
-//         line-height: 30px;
-//         text-align: center;
-//         margin: 0 3px;
-//         background: rgb(203, 61, 61);
-//         color: rgb(255, 255, 255);
-//       }
-//     }
-//     .evreylist {
-//       width: 1000px;
-//       margin: 0 auto;
-//       border-collapse: collapse;
-//       .el-th {
-//         border: 1px solid black;
-//         border-top: none;
-//         &:first-child {
-//           border-left: none;
-//         }
-//         &:last-child {
-//           border-right: none;
-//         }
-//       }
-//       tr {
-//         &:nth-child(odd) {
-//           background: rgba(128, 128, 128, .15);
-//         }
-//         &:first-child {
-//           background: rgb(255, 255, 255);
-//         }
-//       }
-//     }
-//     .light {
-//       background: yellow;
-//     }
-//   }
-// }
+
 
 </style>

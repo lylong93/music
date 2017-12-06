@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="side-tab">
-      <span class="s-t-title" @click="dd">推荐</span>
+      <span class="s-t-title">推荐</span>
       <router-link to="one" class="s-t-every">发现音乐</router-link>
       <router-link to="tow" class="s-t-every">私人FM</router-link>
       <router-link to="#" class="s-t-every">MV</router-link>

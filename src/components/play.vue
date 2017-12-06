@@ -25,7 +25,7 @@
       <span ref="span" @click="go()" class="progress-bar">
         <i ref="i" class="progress-scroll"></i>
       </span>
-      <span class="progress-timeEnd">{{duration | initTime}}</span>
+      <!-- <span class="progress-timeEnd">{{duration | initTime}}</span> -->
       <span class="progress-voice" @click="voice()">
         <svg class="icon" aria-hidden="true">
           <use xlink:href="#icon-weibiaoti102"></use>

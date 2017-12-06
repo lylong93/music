@@ -5,6 +5,8 @@ const tovue = {
   recomList: 'api/personalized', // 推荐歌单
   personNewsongUrl: 'api/personalized/newsong', // 新歌推荐
   songsList: 'api/top/artists', // 歌手列表
+  songAlbum: 'api/artist/album', // 歌手专辑
+  albumDetail: 'api/album', // 专辑内容
 };
 const tostore = {
   musicUrl: 'api/music/url?id=', // 播放地址

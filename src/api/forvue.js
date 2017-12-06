@@ -15,4 +15,10 @@ export default {
   getSongsList(page) {
     return axios.get(ourl.songsList + `?offset=${page}&limit=30`);
   },
+  getsongAlbum(id) {
+    return axios.get(ourl.songAlbum + `?id=${id}&limit=50`);
+  },
+  getalbumDetail(id) {
+    return axios.get(ourl.albumDetail + `?id=${id}`);
+  },
 };

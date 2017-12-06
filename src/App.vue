@@ -4,22 +4,22 @@
     <div class="body-wrapper">
       <div class="side">
         <v-item/>
-        <v-minPlay v-if="ifshow" />
+        <!-- <v-minPlay v-if="ifshow" /> -->
       </div>
       <div class='body'>
         <router-view class='test'></router-view>
       </div>
     </div>
-    <v-play/>
-    <v-minList v-show="this.minlist" />
+    <!-- <v-play/> -->
+    <!-- <v-minList v-show="this.minlist" /> -->
     <transition name="fade" enter-active-class="animated bounceInLeft" leave-active-class="animated flipOutY">
-      <v-playshow v-show="this.playshow"></v-playshow>
+      <!-- <v-playshow v-show="this.playshow"></v-playshow> -->
     </transition>
   </div>
 </template>
 <script>
 import { mapState } from 'vuex';
-import play from './components/play';
+// import play from './components/play';
 import playshow from './components/playshow';
 import item from './components/item';
 import minPlay from './components/minPlay';
@@ -38,24 +38,24 @@ export default {
       minlist: state => state.minlist,
       playlist: state => state.playlist,
     }),
-    ifshow() {
-      if (this.misurl === null) {
-        return false;
-      } else {
-        return true;
-      }
-    },
+    // ifshow() {
+    //   if (this.misurl === null) {
+    //     return false;
+    //   } else {
+    //     return true;
+    //   }
+    // },
   },
   methods: {
     show() {
       this.$store.commit('changePlayShow');
     },
     dd() {
-      console.log(this.$route.name);
+      // console.log(this.$route.name);
     },
   },
   components: {
-    'v-play': play,
+    // 'v-play': play,
     'v-playshow': playshow,
     'v-item': item,
     'v-minPlay': minPlay,

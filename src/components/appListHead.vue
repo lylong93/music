@@ -4,7 +4,7 @@
       <img v-lazy="list.coverImgUrl" height="100%" width="100%">
     </div>
     <div class="applist-head-name">
-      <span class="al-h-h">{{switchTab}}</span><span class="al-h-t">{{list.name}}</span>
+      <span class="al-h-h">gg</span><span class="al-h-t">{{list.name}}</span>
       <div class="applist-h-i">
         <span class="al-h-i"><img :src="list.creator.avatarUrl" height="100%" ></span>
         <span class="al-h-n">{{list.creator.nickname}}</span>
@@ -22,22 +22,22 @@
 export default {
   props: {
     tab: {
-      type: Number,
+      type: String,
       default: 1,
     },
     list: {},
   },
-  computed: {
-    switchTab() {
-      if (this.tab === 2) {
-        return '歌手';
-      } else {
-        return '歌单';
-      }
-    },
-  },
+  // computed: {
+  //   switchTab() {
+  //     if (this.tab === 2) {
+  //       return '歌手';
+  //     } else {
+  //       return '歌单';
+  //     }
+  //   },
+  // },
   created() {
-    console.log(this.list);
+    // console.log(this.list);
   },
 };
 
