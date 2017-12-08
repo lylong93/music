@@ -1,7 +1,8 @@
 <template>
-  <div class="applist" v-if='this.list'>
-    <v-appListHead :tab=this.tab :list='this.list'></v-appListHead>
-    <v-appListMain :tab=this.tab :list='this.list'></v-appListMain>
+  <div class="applist">
+    <!-- <div v-if="ok">{{ok}}</div> -->
+    <v-appListHead :list='this.listHead' :tab='this.tab'></v-appListHead>
+    <!-- <v-appListMain :list='this.songList' :tab='this.tab'></v-appListMain> -->
   </div>
 </template>
 <script>
@@ -14,7 +15,6 @@ export default {
   data() {
     return {
       msg: 'one',
-      list: {},
       songList: [],
       listHead: {},
       d: null,
@@ -24,9 +24,15 @@ export default {
   },
   created() {
     this.init();
-    // this.filterSongSheet();
-    this.filerEvalbum();
-    // this.filerAlbum();
+  },
+  computed: {
+    ok() {
+      if (Object.keys(this.listHead).length !== 0) {
+        return true;
+      } else {
+        return false;
+      }
+    },
   },
   watch: {
     list() {
@@ -37,28 +43,33 @@ export default {
     init() {
       const id = this.$route.query.id;
       const tab = this.$route.query.tab;
-      api.forvue.getAppList(id).then((res) => {
-        this.list = res.data.playlist;
-        this.tab = tab;
-      });
+      this.tab = tab;
+      if (tab === 'A') {
+        this.filterSongSheet(id);
+      } else if (tab === 'B') {
+        this.filerEvalbum();
+      } else if (tab === 'C') {
+        this.filerAlbum();
+      }
     },
     // 歌单
-    filterSongSheet() {
-      const id = this.$route.query.id;
+    filterSongSheet(id) {
       api.forvue.getAppList(id).then((res) => {
-        const odata = res.data;
+        const odata = res.data.playlist;
         this.listHead = {
           coverImgUrl: odata.coverImgUrl,
           description: odata.description,
           tags: odata.tags,
           name: odata.name,
           createTime: odata.createTime,
+          createName: odata.creator.nickname,
+          createPic: odata.creator.avatarUrl,
           trackCount: odata.trackCount,
           playCount: odata.playCount,
           commentCount: odata.commentCount,
-          nickname: odata.nickname,
         };
-        const data = odata.playlist.tracks;
+        console.log('ok');
+        const data = odata.tracks;
         data.forEach((item) => {
           const itemid = item.id;
           const name = item.name;
@@ -74,23 +85,23 @@ export default {
     filerEvalbum() {
       const id = 6452;
       api.forvue.getsongAlbum(id).then((res) => {
-        const odata = res.data;
+        const odata = res.data.artist;
         this.listHead = {
-          picUrl: odata.picUrl,
+          coverImgUrl: odata.picUrl,
           name: odata.name,
           alias: odata.alias,
           musicSize: odata.musicSize,
           albumSize: odata.albumSize,
         };
-        const data = odata.hotAlbums;
+        const data = res.data.hotAlbums;
         data.forEach((item) => {
           const avart = item.picUrl;
           const name = item.name;
           const itemid = item.id;
           const time = item.publishTime;
+
           const obj = new Evalbum(avart, time, itemid, name);
           this.songList.push(obj);
-          console.log(this.songList);
         });
       });
     },
@@ -101,9 +112,9 @@ export default {
         const odata = res.data;
         this.listHead = {
           name: odata.album.name,
-          picUrl: odata.album.picUrl,
+          coverImgUrl: odata.album.picUrl,
+          song: odata.album.artist.name,
           publishTime: odata.album.publishTime,
-          commentCount: odata.album.info.commentCount,
         };
         const data = odata.songs;
         data.forEach((item) => {

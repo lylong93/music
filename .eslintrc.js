@@ -42,6 +42,7 @@ module.exports = {
         'no-restricted-syntax': [0],
         'no-useless-return': [0],
         'linebreak-style': 0,
-        'no-debugger': process.env.NODE_ENV === 'production' ? 2 : 0
+        'no-debugger': process.env.NODE_ENV === 'production' ? 2 : 0,
+        'consistent-return': 0,
     }
 }

@@ -4,17 +4,27 @@
       <img v-lazy="list.coverImgUrl" height="100%" width="100%">
     </div>
     <div class="applist-head-name">
-      <span class="al-h-h">gg</span><span class="al-h-t">{{list.name}}</span>
-      <div class="applist-h-i">
-        <span class="al-h-i"><img :src="list.creator.avatarUrl" height="100%" ></span>
-        <span class="al-h-n">{{list.creator.nickname}}</span>
-        <span class="al-h-time">2017-08-16创建</span>
+      <span class="al-h-h">{{switchTab}}</span><span class="al-h-t">{{list.name}}</span>
+      <div v-if="tab ==='A'">
+        <div class="applist-h-i">
+          <span class="al-h-i"><img :src="list.createPic" height="100%" ></span>
+          <span class="al-h-n">{{list.createName}}</span>
+          <span class="al-h-time">{{list.createTime}}</span>
+        </div>
+        <div class="applist-h-it">标签: &nbsp; &nbsp;
+          <span v-for="item in list.tags" style="color:blue">{{item}}/</span>
+        </div>
+        <div><span>简介: &nbsp; &nbsp;</span> <span class="applist-h-d">{{list.description}}</span></div>
       </div>
-      <div> &nbsp; </div>
-      <div class="applist-h-it">标签: &nbsp; &nbsp;
-        <span v-for="item in list.creator.expertTags" style="color:blue">{{item}}/</span>
+      <div v-else-if="tab ==='B'">
+        <div>{{list.alias}}</div>
+        <div>单曲数:{{list.musicSize}}</div>
+        <div>专辑数:{{list.albumSize}}</div>
       </div>
-      <div><span>简介: &nbsp; &nbsp;</span> <span class="applist-h-d">{{list.description}}</span></div>
+      <div v-else-if="tab ==='C'">{{tab}}
+        <div>{{list.song}}</div>
+        <div>{{list.publishTime}}</div>
+      </div>
     </div>
   </div>
 </template>
@@ -23,19 +33,21 @@ export default {
   props: {
     tab: {
       type: String,
-      default: 1,
+      default: 'A',
     },
     list: {},
   },
-  // computed: {
-  //   switchTab() {
-  //     if (this.tab === 2) {
-  //       return '歌手';
-  //     } else {
-  //       return '歌单';
-  //     }
-  //   },
-  // },
+  computed: {
+    switchTab() {
+      if (this.tab === 'A') {
+        return '歌单';
+      } else if (this.tab === 'B') {
+        return '歌手';
+      } else if (this.tab === 'C') {
+        return '专辑';
+      }
+    },
+  },
   created() {
     // console.log(this.list);
   },
