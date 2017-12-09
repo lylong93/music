@@ -1,8 +1,7 @@
 <template>
   <div class="applist">
-    <!-- <div v-if="ok">{{ok}}</div> -->
     <v-appListHead :list='this.listHead' :tab='this.tab'></v-appListHead>
-    <!-- <v-appListMain :list='this.songList' :tab='this.tab'></v-appListMain> -->
+    <v-appListMain :songList='this.songList' :tab='this.tab'></v-appListMain>
   </div>
 </template>
 <script>
@@ -34,11 +33,6 @@ export default {
       }
     },
   },
-  watch: {
-    list() {
-      this.haveAdd = false; // 已经添加到列表
-    },
-  },
   methods: {
     init() {
       const id = this.$route.query.id;
@@ -68,7 +62,6 @@ export default {
           playCount: odata.playCount,
           commentCount: odata.commentCount,
         };
-        console.log('ok');
         const data = odata.tracks;
         data.forEach((item) => {
           const itemid = item.id;
@@ -107,9 +100,11 @@ export default {
     },
     // 专辑
     filerAlbum() {
+      console.log('ok');
       const id = 18907;
       api.forvue.getalbumDetail(id).then((res) => {
         const odata = res.data;
+        console.log('odata');
         this.listHead = {
           name: odata.album.name,
           coverImgUrl: odata.album.picUrl,

@@ -21,7 +21,7 @@
         <div>单曲数:{{list.musicSize}}</div>
         <div>专辑数:{{list.albumSize}}</div>
       </div>
-      <div v-else-if="tab ==='C'">{{tab}}
+      <div v-else-if="tab ==='C'">
         <div>{{list.song}}</div>
         <div>{{list.publishTime}}</div>
       </div>
@@ -47,9 +47,6 @@ export default {
         return '专辑';
       }
     },
-  },
-  created() {
-    // console.log(this.list);
   },
 };
 
