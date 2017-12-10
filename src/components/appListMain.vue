@@ -17,39 +17,31 @@
       <span class="a-m-h-tab">专辑详情</span>
     </div>
     <div v-if="tab === 'B'">
-      <div v-for="(item,index) in songList">
-        <div>
-          <div>
-            <img v-lazy="item.avart" style="width:100px;">
+      <div v-for="(item,index) in songList" class="evreyablum">
+        <div class="evreyablum-left">
+          <div class="ab-pic">
+            <img v-lazy="item.avart" style="width:100%;">
           </div>
           <div>{{item.time}}</div>
         </div>
-        <div>
-          <div>{{item.name}}</div>
-          <div>
-            <ul>
-              <li v-for="(item,index) in this.t">
-                {{index}}
-              </li>
-            </ul>
-          </div>
+        <div class="evreyablum-right">
+          <div class="e-r-i">{{item.name}}</div>
+          <div class="e-r-c">(点击查看详情)</div>
         </div>
       </div>
     </div>
-    <table class="evreylist" v-else>
+    <table class="evreylist " v-else>
       <tr>
-        <th class='el-th'></th>
-        <th class='el-th'>操作</th>
-        <th class='el-th'>音乐标题</th>
-        <th class='el-th'>歌手</th>
-        <th class='el-th'>专辑</th>
+        <th class='el-th' style="width:10%;text-align:center">序列</th>
+        <th class='el-th' style="width:30%">音乐标题</th>
+        <th class='el-th' style="width:30%">歌手</th>
+        <th class='el-th' style="width:30%">专辑</th>
       </tr>
-      <tr v-for="(item, index) in songList" class="el-every" :data-id="item.id" :class="{light: now(index)}" @dblclick='toPlay($event)'>
-        <td>{{index+1}}</td>
-        <td>*</td>
+      <tr v-for="(item, index) in songList " :data-id="item.id " :class="{light: now(index)} " @dblclick='toPlay($event)'>
+        <td class="index">0{{index+1}}</td>
         <td>{{item.name}}</td>
-        <td v-for="k in item.song">
-          <span>{{k.name}}</span>
+        <td>
+          <span v-for="k in item.song">{{k.name}}<span v-if="item.song.length > 1">/</span></span>
         </td>
         <td>{{item.album.name}}</td>
       </tr>
@@ -79,24 +71,16 @@ export default {
   created() {
     // console.log('ok');
   },
-  watch: {
-    songList() {
-      this.go();
-      console.log('gogo');
-    },
-  },
   methods: {
+    // 获取专辑歌单 信息量大 被拦截
     go() {
       const list = this.songList;
       list.forEach((item) => {
         this.do(item.id);
-        // console.log('zhixin');
       });
     },
     do(id) {
-      console.log('zhixin');
       api.forvue.getalbumDetail(id).then((res) => {
-        console.log('zenme');
         const data = res.data.songs;
         data.forEach((item) => {
           const oname = item.name;
@@ -160,9 +144,11 @@ export default {
     width: 1000px;
     margin: 0 auto;
     border-collapse: collapse;
+    text-align: left;
     .el-th {
       border: 1px solid black;
       border-top: none;
+      padding-left: 10px;
       &:first-child {
         border-left: none;
       }
@@ -176,6 +162,36 @@ export default {
       }
       &:first-child {
         background: rgb(255, 255, 255);
+      }
+    }
+    td {
+      padding-left: 5px;
+    }
+    .index {
+      text-align: center;
+    }
+  }
+  .evreyablum {
+    margin: 30px;
+    display: flex;
+    .evreyablum-left {
+      flex: 0, 1, 200px;
+      margin-right: 100px;
+      .ab-pic {
+        width: 150px;
+        height: 150px;
+      }
+    }
+    .evreyablum-right {
+      margin-left: 100px;
+      min-width: 500px;
+      height: 20px;
+      .e-r-i {
+        font-weight: 600;
+        font-size: 25px;
+      }
+      .e-r-c {
+        font-weight: 300;
       }
     }
   }

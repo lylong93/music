@@ -14,7 +14,9 @@
         <div class="applist-h-it">标签: &nbsp; &nbsp;
           <span v-for="item in list.tags" style="color:blue">{{item}}/</span>
         </div>
-        <div><span>简介: &nbsp; &nbsp;</span> <span class="applist-h-d">{{list.description}}</span></div>
+        <div><span>简介: &nbsp; &nbsp;</span>
+          <div class="applist-h-d" v-html="list.description"></div>
+        </div>
       </div>
       <div v-else-if="tab ==='B'">
         <div>{{list.alias}}</div>
@@ -53,7 +55,8 @@ export default {
 </script>
 <style lang='scss'>
 .applist-head {
-  height: 250px;
+  // height: 250px;
+  margin-bottom: 20px;
   display: flex;
   .applist-head-covering {
     flex: 0 0 180px;
@@ -101,17 +104,14 @@ export default {
       margin: 8px 0;
     }
     .applist-h-d {
-      display: inline-block;
-      height: 30px;
-      width: 500px;
-      font-size: 15px;
+      display: inline-block; // height: 30px;
+      width: 500px; // font-size: 15px;
       color: rgba(0, 0, 0, .7);
       white-space: nowrap;
       text-overflow: ellipsis;
       overflow: hidden;
       vertical-align: top;
     }
-    ;
   }
 }
 

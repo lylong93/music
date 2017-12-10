@@ -62,6 +62,7 @@ export default {
           playCount: odata.playCount,
           commentCount: odata.commentCount,
         };
+        console.log(this.listHead);
         const data = odata.tracks;
         data.forEach((item) => {
           const itemid = item.id;

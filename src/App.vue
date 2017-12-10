@@ -91,12 +91,12 @@ export default {
       display: flex;
       flex: 9 1 auto;
       overflow: auto;
-      justify-conten: center;
-      background: rgb(255, 255, 123);
+      justify-conten: center; // background: rgb(255, 255, 123);
       .test {
         flex: 0 1 1000px;
         width: 0;
         margin: 0 auto;
+        min-width: 1000px;
         background: rgb(255, 255, 255);
       }
     }

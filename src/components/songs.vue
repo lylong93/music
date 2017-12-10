@@ -1,23 +1,24 @@
 <template>
   <div>
     <v-topRoute/>
-    <div>
-      <div>语种
-        <span v-for="item in lang">
+    <!-- <div>
+  <div>语种
+    <span v-for="item in lang">
           {{item}}
         </span>
-      </div>
-      <div>筛选
-        <span v-for="item in 26"> 
+  </div>
+  <div>筛选
+    <span v-for="item in 26"> 
           {{String.fromCharCode(64+item)}}
         </span>
-      </div>
-    </div>
+  </div>
+</div>
+ -->
     <v-loading v-show="this.songsList.length === 0"></v-loading>
-    <div>
-      <div v-for="item in songsList" :key="item.id" @click='detail(item.id)'>
-        <div>
-          <img v-lazy="item.picUrl"></img>
+    <div class="songs-wrapper">
+      <div v-for="item in songsList" :key="item.id" @click='detail(item.id)' class="everysong">
+        <div class="ever-pic">
+          <img v-lazy="item.picUrl" style="width:100%"></img>
         </div>
         <div>
           {{item.name}}
@@ -25,8 +26,8 @@
       </div>
     </div>
     <div>
-      <div v-if="this.more" v-on:click="loadMore">增加</div>
-      <div v-else>没有了</div>
+      <div v-if="this.more" v-on:click="loadMore" class="more">增加</div>
+      <div v-else class="more">没有了</div>
     </div>
   </div>
 </template>
@@ -85,6 +86,24 @@ export default {
 
 </script>
 <style lang="scss">
+.songs-wrapper {
+  min-width: 1000px;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  .everysong {
+    margin: 10px 10px;
+    .ever-pic {
+      width: 150px;
+      height: 130px;
+    }
+  }
+}
 
+.more {
+  text-align: center;
+  font-weight: 700;
+  font-size: 30px; // background: red;
+}
 
 </style>
