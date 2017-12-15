@@ -26,7 +26,7 @@
       </div>
     </div>
     <div>
-      <div v-if="this.more" v-on:click="loadMore" class="more">增加</div>
+      <div v-if="this.more" v-on:click="loadMore" class="more">查看更多</div>
       <div v-else class="more">没有了</div>
     </div>
   </div>
@@ -103,7 +103,11 @@ export default {
 .more {
   text-align: center;
   font-weight: 700;
-  font-size: 30px; // background: red;
+  font-size: 20px;
+  cursor: pointer;
+  &:hover {
+    background: red;
+  }
 }
 
 </style>
