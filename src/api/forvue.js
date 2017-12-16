@@ -21,4 +21,7 @@ export default {
   getalbumDetail(id) {
     return axios.get(ourl.albumDetail + `?id=${id}`);
   },
+  getSongSheet(page) {
+    return axios.get(ourl.songSheet + `?offset=${page}&limit=30`);
+  },
 };

@@ -7,6 +7,7 @@ const tovue = {
   songsList: 'api/top/artists', // 歌手列表
   songAlbum: 'api/artist/album', // 歌手专辑
   albumDetail: 'api/album', // 专辑内容
+  songSheet: 'api/top/playlist', // 歌单
 };
 const tostore = {
   musicUrl: 'api/music/url?id=', // 播放地址
