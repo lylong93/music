@@ -20,9 +20,6 @@ export default {
       arr,
     };
   },
-  created() {},
-  computed: {},
-  methods: {},
 };
 
 </script>

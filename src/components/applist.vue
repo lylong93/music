@@ -101,7 +101,6 @@ export default {
     },
     // 专辑
     filerAlbum() {
-      console.log('ok');
       const id = 18907;
       api.forvue.getalbumDetail(id).then((res) => {
         const odata = res.data;

@@ -48,9 +48,6 @@ export default {
       currentTime: state => state.currentTime,
       detail: state => state.detail,
     }),
-    // test() {
-    //   return true;
-    // },
   },
   watch: {
     musicId() {
