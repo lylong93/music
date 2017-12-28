@@ -73,7 +73,7 @@ export default {
     },
     detail(id) {
       // const id = event.currentTarget.dataset.id;
-      const tab = 2;
+      const tab = 'B';
       this.$router.push({ path: 'applist', query: { id, tab } });
       console.log(id);
     },
