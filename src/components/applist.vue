@@ -40,7 +40,8 @@ export default {
       this.tab = tab;
       if (tab === 'A') {
         this.filterSongSheet(id);
-      } else if (tab === 'B') {
+      } else if (tab === 'B
+') {
         this.filerEvalbum();
       } else if (tab === 'C') {
         this.filerAlbum();

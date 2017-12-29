@@ -26,7 +26,7 @@
         </div>
         <div class="evreyablum-right">
           <div class="e-r-i">{{item.name}}</div>
-          <div class="e-r-c">(点击查看详情)</div>
+          <div class="e-r-c" :@click="detail">(点击查看详情)</div>
         </div>
       </div>
     </div>
@@ -118,6 +118,9 @@ export default {
           this.haveAdd = true;
         }
       }
+    },
+    detail() {
+
     },
   },
 };
