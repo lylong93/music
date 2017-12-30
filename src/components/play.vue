@@ -101,7 +101,6 @@ export default {
       /* 延迟执行 避免load和play冲突 */
       const that = this;
       setTimeout(() => {
-        console.log('hi');
         that.$refs.hidPlay.play();
       }, 1);
     },
@@ -129,8 +128,6 @@ export default {
       if (s < 10) {
         s = '0' + s;
       }
-      console.log(v / 60);
-      console.log(t);
       return t + ':' + s;
     },
   },

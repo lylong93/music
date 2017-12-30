@@ -40,11 +40,10 @@ export default {
       this.tab = tab;
       if (tab === 'A') {
         this.filterSongSheet(id);
-      } else if (tab === 'B
-') {
-        this.filerEvalbum();
+      } else if (tab === 'B') {
+        this.filerEvalbum(id);
       } else if (tab === 'C') {
-        this.filerAlbum();
+        this.filerAlbum(id);
       }
     },
     // 歌单
@@ -77,8 +76,7 @@ export default {
       });
     },
     // 歌手
-    filerEvalbum() {
-      const id = 6452;
+    filerEvalbum(id) {
       api.forvue.getsongAlbum(id).then((res) => {
         const odata = res.data.artist;
         this.listHead = {
@@ -101,8 +99,8 @@ export default {
       });
     },
     // 专辑
-    filerAlbum() {
-      const id = 18907;
+    filerAlbum(id) {
+      // const id = 18907;
       api.forvue.getalbumDetail(id).then((res) => {
         const odata = res.data;
         console.log('odata');

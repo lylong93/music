@@ -23,10 +23,11 @@
             <img v-lazy="item.avart" style="width:100%;">
           </div>
           <div>{{item.time}}</div>
+          <div>{{item.id}}</div>
         </div>
         <div class="evreyablum-right">
-          <div class="e-r-i">{{item.name}}</div>
-          <div class="e-r-c" :@click="detail">(点击查看详情)</div>
+          <div class="e-r-i" :key="item.id" @click='detail(item.id)'>{{item.name}}</div>
+          <div class="e-r-c">(点击查看详情)</div>
         </div>
       </div>
     </div>
@@ -69,7 +70,7 @@ export default {
     // console.log('ok2');
   },
   created() {
-    // console.log('ok');
+    console.log(this.songList);
   },
   methods: {
     // 获取专辑歌单 信息量大 被拦截
@@ -119,8 +120,10 @@ export default {
         }
       }
     },
-    detail() {
-
+    detail(id) {
+      const tab = 'C';
+      this.$router.push({ path: 'album', query: { id, tab } });
+      window.location.reload();
     },
   },
 };

@@ -30,5 +30,9 @@ export default new Router({
     path: '/applist',
     name: 'applist',
     component: applist,
+  }, {
+    path: '/Album',
+    name: 'album',
+    component: applist,
   }],
 });

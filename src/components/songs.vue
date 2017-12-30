@@ -65,15 +65,12 @@ export default {
         if (res.data.code === 200) {
           this.songsList = this.songsList.concat(res.data.artists);
           this.more = res.data.more;
-          console.log(res.data);
         } else {
           return;
         }
       });
     },
-    detail
-(id) {
-      // const id = event.currentTarget.dataset.id;
+    detail(id) {
       const tab = 'B';
       this.$router.push({ path: 'applist', query: { id, tab } });
       console.log(id);

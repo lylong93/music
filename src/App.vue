@@ -10,7 +10,7 @@
         <router-view class='test'></router-view>
       </div>
     </div>
-    <!-- <v-play/> -->
+    <v-play/>
     <!-- <v-minList v-show="this.minlist" /> -->
     <transition name="fade" enter-active-class="animated bounceInLeft" leave-active-class="animated flipOutY">
       <!-- <v-playshow v-show="this.playshow"></v-playshow> -->
@@ -19,7 +19,7 @@
 </template>
 <script>
 import { mapState } from 'vuex';
-// import play from './components/play';
+import play from './components/play';
 import playshow from './components/playshow';
 import item from './components/item';
 import minPlay from './components/minPlay';
@@ -55,7 +55,7 @@ export default {
     },
   },
   components: {
-    // 'v-play': play,
+    'v-play': play,
     'v-playshow': playshow,
     'v-item': item,
     'v-minPlay': minPlay,
