@@ -5,7 +5,6 @@
 ## 技术使用
 使用Vuex管理数据，使用Axios请求<br> 
 后台使用了Binaryify提供的[API]（https://github.com/Binaryify/NeteaseCloudMusicApi）<br>
-现完成了主要组件开发
 
 ## 项目运行
 打开api项目用作后台
